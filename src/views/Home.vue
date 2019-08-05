@@ -1,18 +1,89 @@
 <template>
   <v-app>
     <v-app-bar app>
-      <v-container class="title">Car rental service</v-container>
+      <v-container class="app-bar">
+        <span class="title" @click="onClickLogo">
+          Car rental service
+        </span>
+        <transition name="fade">
+          <span class="current-page-tab" v-if="currentPage.className != 'home'" :class="currentPage.className">{{currentPage.text}}</span>
+        </transition>
+      </v-container>
     </v-app-bar>
-    <v-content> </v-content>
+    <v-content>
+      <router-view></router-view>
+    </v-content>
   </v-app>
 </template>
 
 <script>
+import * as Routes from '../router';
+import {choosingContent}  from '@/services/Content.serivce.js';
 export default {
-  components: {}
+  data(){
+    return {
+      currentPage: this.switchPath()
+    }
+  },
+  components: {},
+  methods: {
+    onClickLogo() {
+      this.$router.push(Routes.PATH_HOME);
+    },
+    switchPath() {
+       switch(this.$router.history.current.name) {
+        case 'home':
+          return {
+            className: 'home',
+            text: ''
+          };
+        case 'order':
+          return {
+            className: 'order',
+            text: choosingContent.orderTitle
+          };
+        case 'return':
+          return {
+            className: 'return',
+            text: choosingContent.returnTitle
+          }
+          
+       }
+    }
+  },
+  watch: {
+    '$route' (to, from){
+      this.currentPage = this.switchPath();
+    }
+  }
 };
 </script>
-<style lang="sass">
-.example
-  color: red
+<style lang="scss">
+@import '~global';
+.app-bar {
+  display: flex;
+  justify-content: center;
+}
+
+.title {
+  cursor: pointer;
+  margin-right: auto;
+}
+
+.current-page-tab {
+  margin-left: auto;
+  color: $color-white;
+  padding: 4px 40px;
+  border-radius: 15px;
+  text-transform: uppercase;
+  font-weight: bold;
+
+  &.order {
+    background-color: $color-tile-order;
+  }
+
+  &.return {
+    background-color: $color-tile-return;
+  }
+}
 </style>

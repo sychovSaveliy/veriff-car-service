@@ -1,7 +1,21 @@
 $default-color: aqua;
+$color-white: #fff;
+
+$color-tile-order: burlywood;
+$color-tile-return: lightcoral;
 // font-sizes
 $fs_xss: 10px;
 $fs_xs: 12px;
 $fs_sm: 14px;
 $fs_mm: 16px;
 $fs_md: 24px;
+
+
+
+// transitions
+.fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to {
+    opacity: 0;
+}
