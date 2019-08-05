@@ -22,7 +22,7 @@
             </div>
             <div class="action-view__area">
                 <div id="map">
-                    Map
+                    Map     
                 </div>
             </div>
         </div>

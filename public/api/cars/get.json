@@ -1,0 +1,45 @@
+{
+    "data": {
+        "cars": {
+            "0001": {
+                "position": {
+                    "lang": "",
+                    "lat": ""
+                },
+                "status": "ready",
+                "info": {
+                    "brand": "Toyota",
+                    "model": "Corolla",
+                    "year": "2006",
+                    "seats": "5"
+                }
+            },
+            "0002": {
+                "position": {
+                    "lang": "",
+                    "lat": ""
+                },
+                "status": "ready",
+                "info": {
+                    "brand": "Mercedes",
+                    "model": "E-class",
+                    "year": "2009",
+                    "seats": "7"
+                }
+            },
+            "0003": {
+                "position": {
+                    "lang": "",
+                    "lat": ""
+                },
+                "status": "ready",
+                "info": {
+                    "brand": "Audi",
+                    "model": "A4",
+                    "year": "2007",
+                    "seats": "5"
+                }
+            }
+        }
+    }
+}

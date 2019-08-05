@@ -6,7 +6,13 @@
           Car rental service
         </span>
         <transition name="fade">
-          <span class="current-page-tab" v-if="currentPage.className != 'home'" :class="currentPage.className">{{currentPage.text}}</span>
+          <span
+            v-if="currentPage.className != 'home'"
+            class="current-page-tab"
+            :class="currentPage.className"
+          >
+            {{ currentPage.text }}
+          </span>
         </transition>
       </v-container>
     </v-app-bar>
@@ -17,49 +23,47 @@
 </template>
 
 <script>
-import * as Routes from '../router';
-import {choosingContent}  from '@/services/Content.serivce.js';
+import * as Routes from "../router";
+import { choosingContent } from "@/services/Content.serivce.js";
 export default {
-  data(){
+  data() {
     return {
       currentPage: this.switchPath()
+    };
+  },
+  watch: {
+    $route() {
+      this.currentPage = this.switchPath();
     }
   },
-  components: {},
   methods: {
     onClickLogo() {
       this.$router.push(Routes.PATH_HOME);
     },
     switchPath() {
-       switch(this.$router.history.current.name) {
-        case 'home':
+      switch (this.$router.history.current.name) {
+        case "home":
           return {
-            className: 'home',
-            text: ''
+            className: "home",
+            text: ""
           };
-        case 'order':
+        case "order":
           return {
-            className: 'order',
+            className: "order",
             text: choosingContent.orderTitle
           };
-        case 'return':
+        case "return":
           return {
-            className: 'return',
+            className: "return",
             text: choosingContent.returnTitle
-          }
-          
-       }
-    }
-  },
-  watch: {
-    '$route' (to, from){
-      this.currentPage = this.switchPath();
+          };
+      }
     }
   }
 };
 </script>
 <style lang="scss">
-@import '~global';
+@import "~global";
 .app-bar {
   display: flex;
   justify-content: center;

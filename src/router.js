@@ -4,9 +4,9 @@ import Home from "./views/Home.vue";
 import Login from "./views/Login.vue";
 import log from "./middleware/log";
 import auth from "./middleware/auth";
-import Choosing from './components/Choosing.vue';
-import OrderCar from './components/OrderCar.vue';
-import ReturnCar from './components/ReturnCar.vue';
+import Choosing from "./components/Choosing.vue";
+import OrderCar from "./components/OrderCar.vue";
+import ReturnCar from "./components/ReturnCar.vue";
 
 export const PATH_HOME = "/";
 export const PATH_LOGIN = "/login";
@@ -21,20 +21,25 @@ const router = new Router({
   routes: [
     {
       path: PATH_HOME,
-      name: "home",
       component: Home,
       meta: {
         middleware: [log, auth]
       },
       children: [
         {
-          path: PATH_HOME, component: Choosing, name: 'home'
+          path: PATH_HOME,
+          component: Choosing,
+          name: "home"
         },
         {
-          path: PATH_ORDER_CAR, component: OrderCar, name: 'order'
+          path: PATH_ORDER_CAR,
+          component: OrderCar,
+          name: "order"
         },
         {
-          path: PATH_RETURN_CAR, component: ReturnCar, name: 'return'
+          path: PATH_RETURN_CAR,
+          component: ReturnCar,
+          name: "return"
         }
       ]
     },

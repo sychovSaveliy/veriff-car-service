@@ -1,0 +1,39 @@
+{
+    "entities": {
+        "user": {
+            "id": "number",
+            "email": "string"
+        },
+        "map": {
+            "cars": "array of car"
+        },
+        "car": {
+            "id": "number",
+            "position": {
+                "lang": "number",
+                "lat": "number"
+            },
+            "info": {
+                "brand": "string",
+                "model": "string",
+                "year": "string",
+                "seats": "number"
+            },
+            "status": "one of 'ready' | 'during_start' | 'drive'",
+            "userId": "number in user",
+            "history": "list of using"
+        },
+        "history": {
+            "id": "number",
+            "start": {
+                "lang": "number",
+                "lat": "number"
+            },
+            "end": {
+                "lang": "number",
+                "lat": "number"
+            },
+            "userId": "number in user"
+        }
+    }
+}
