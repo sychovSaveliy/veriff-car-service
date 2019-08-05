@@ -1,10 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import store from "./store/index";
 
 Vue.use(Vuex);
 
-export default new Vuex.Store({
-  state: {},
-  mutations: {},
-  actions: {}
-});
+export default new Vuex.Store(store);
