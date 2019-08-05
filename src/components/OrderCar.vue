@@ -1,8 +1,20 @@
 <template>
     <div class="order-view">
         <div class="actions-bar">
-            <v-btn :class="['action-btn', 'by-id']" @click="onChangeType('id')">{{content.actions.byId}}</v-btn>
-            <v-btn :class="['action-btn', 'on-map']" @click="onChangeType('map')">{{content.actions.onMap}}</v-btn>
+             <div class="actions-wrapper">
+                 <transition name="fade">
+                    <v-text-field
+                        class="action-text-field"
+                        v-if="getOrderType == 'id'"
+                        v-model="orderId"
+                        placeholder="6782"
+                        :counter="4"
+                        maxlength="4"
+                    ></v-text-field>
+                </transition>
+                <v-btn :class="['action-btn', 'by-id']" @click="onChangeType('id')">{{content.actions.byId}}</v-btn>
+                <v-btn :class="['action-btn', 'on-map']" @click="onChangeType('map')">{{content.actions.onMap}}</v-btn>
+             </div>
         </div>
         <div class="action-view">
             <div class="action-view__list">
@@ -10,7 +22,7 @@
             </div>
             <div class="action-view__area">
                 <div id="map">
-                    
+                    Map
                 </div>
             </div>
         </div>
@@ -23,6 +35,7 @@ import {ORDER_TYPE_MUTATION} from '@/store/constants';
 export default {
    data() {
        return {
+           orderId: '',
            content: orderContent
        };
    },
@@ -57,6 +70,19 @@ export default {
 
 .action-btn {
     margin: 10px;
+}
+
+.actions-wrapper {
+    display: flex;
+    position: relative;
+}
+
+.action-text-field {
+    position: absolute;
+    left: -45%;
+    top: 0;
+    padding-top: 8px;
+    max-width: 80px;
 }
 
 .action-view {

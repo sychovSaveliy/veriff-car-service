@@ -6,7 +6,7 @@ export const choosingContent = {
 export const orderContent = {
     actions: {
         text: 'Как найти машину?',
-        byId: 'я знаю id',
-        onMap: 'на карте'
+        byId: 'I know ID',
+        onMap: 'On Map'
     }
 }; 
