@@ -21,7 +21,8 @@ export default class {
     }
     // options.headers.authorization = localStorage.getItem('jwt') || '';
     options.headers = options.headers || {};
-    options.headers["Access-Control-Allow-Headers"] = "Access-Control-Request-Headers,Content-Type";
+    options.headers["Access-Control-Allow-Headers"] =
+      "Access-Control-Request-Headers,Content-Type";
     options.headers["Content-Type"] = "application/json";
 
     return fetch(`${getPath() + url}`, options)
