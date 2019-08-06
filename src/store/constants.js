@@ -1,6 +1,8 @@
 // Order flow
 
 export const ORDER_TYPE_MUTATION = "ORDER_TYPE_MUTATION";
+export const CAR_INITIAL_LIST_ACTION = "CAR_INITIAL_LIST_ACTION";
+export const CAR_INITIAL_LIST_MUTATION = "CAR_INITIAL_LIST_MUTATION";
 
 // default values
 export const ORDER_TYPE_DEFAULT = "map";

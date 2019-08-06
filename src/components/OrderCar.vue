@@ -23,7 +23,7 @@
     <div class="action-view">
       <div class="action-view__list">
         <div class="car-list">
-          <div v-for="(item, key) in listCars" :key="item.id">
+          <div v-for="(item, key) in getCarList" :key="item.id">
             {{ key }} - {{ item.info.brand }}
           </div>
         </div>
@@ -38,26 +38,29 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import { orderContent } from "@/services/Content.serivce.js";
-import { ORDER_TYPE_MUTATION } from "@/store/constants";
-import API from "@/services/API.service.js";
+import {
+  ORDER_TYPE_MUTATION,
+  CAR_INITIAL_LIST_ACTION
+} from "@/store/constants";
 
 export default {
   data() {
     return {
       orderId: "",
-      content: orderContent,
-      listCars: {}
+      content: orderContent
     };
   },
   computed: {
     getOrderType() {
       return this.$store.getters.getOrderType;
-    }
+    },
+    ...mapGetters(["getCarList"])
   },
   created() {
-    API.fetch("/cars").then(resp => {
-      this.listCars = resp && resp.data && resp.data.cars;
+    this.$store.dispatch({
+      type: CAR_INITIAL_LIST_ACTION
     });
   },
   methods: {
