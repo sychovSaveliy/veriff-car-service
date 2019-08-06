@@ -10,6 +10,8 @@
             placeholder="6782"
             :counter="4"
             maxlength="4"
+            hint="2-4 symbols"
+            @input="onInputId()"
           ></v-text-field>
         </transition>
         <v-btn :class="['action-btn', 'by-id']" @click="onChangeType('id')">
@@ -42,7 +44,9 @@ import { mapGetters } from "vuex";
 import { orderContent } from "@/services/Content.serivce.js";
 import {
   ORDER_TYPE_MUTATION,
-  CAR_INITIAL_LIST_ACTION
+  CAR_INITIAL_LIST_ACTION,
+  CAR_FILTRED_LIST_ACTION,
+  CAR_RESET_FILTRED_LIST_MUTATION
 } from "@/store/constants";
 
 export default {
@@ -68,6 +72,18 @@ export default {
       this.$store.commit({
         type: ORDER_TYPE_MUTATION,
         newType: type
+      });
+    },
+    onInputId() {
+      if (this.orderId.length < 2) {
+        this.$store.commit({
+          type: CAR_RESET_FILTRED_LIST_MUTATION
+        });
+        return;
+      }
+      this.$store.dispatch({
+        type: CAR_FILTRED_LIST_ACTION,
+        orderId: this.orderId
       });
     }
   }
