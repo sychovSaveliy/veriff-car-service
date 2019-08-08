@@ -18,6 +18,7 @@
     </v-app-bar>
     <v-content>
       <router-view></router-view>
+      <MyPosition />
     </v-content>
   </v-app>
 </template>
@@ -25,7 +26,11 @@
 <script>
 import * as Routes from "../router";
 import { choosingContent } from "@/services/Content.serivce.js";
+import MyPosition from "@/components/MyPosition.vue";
 export default {
+  components: {
+    MyPosition
+  },
   data() {
     return {
       currentPage: this.switchPath()

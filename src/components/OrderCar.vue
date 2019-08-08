@@ -49,7 +49,18 @@
       </div>
       <div class="action-view__area">
         <div id="map">
-          Map
+          <gmap-map
+            :center="map.center"
+            :zoom="12"
+            style="width:100%;  height: 400px;"
+          >
+            <gmap-marker
+              v-for="(m, index) in map.markers"
+              :key="index"
+              :position="m.position"
+              @click="map.center = m.position"
+            ></gmap-marker>
+          </gmap-map>
         </div>
       </div>
     </div>
@@ -75,7 +86,13 @@ export default {
         id: 10,
         info: {}
       },
-      carListUnWatch: null
+      carListUnWatch: null,
+      map: {
+        center: { lat: 45.508, lng: -73.587 },
+        markers: [],
+        places: [],
+        currentPlace: null
+      }
     };
   },
   computed: {
@@ -83,6 +100,9 @@ export default {
       return this.$store.getters.getOrderType;
     },
     ...mapGetters(["getCarList"])
+  },
+  mounted() {
+    this.geolocate();
   },
   created() {
     this.$store.dispatch({
@@ -99,6 +119,32 @@ export default {
     });
   },
   methods: {
+    setPlace(place) {
+      this.map.currentPlace = place;
+    },
+    addMarker() {
+      if (this.map.currentPlace) {
+        const marker = {
+          lat: this.map.currentPlace.geometry.location.lat(),
+          lng: this.map.currentPlace.geometry.location.lng()
+        };
+        this.map.markers.push({ position: marker });
+        this.map.places.push(this.currentPlace);
+        this.map.center = marker;
+        this.map.currentPlace = null;
+      }
+    },
+    geolocate: function() {
+      navigator.geolocation.getCurrentPosition(position => {
+        const coords = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+        this.map.center = coords;
+
+        this.map.markers.push({ position: coords });
+      });
+    },
     onChangeType(type) {
       this.$store.commit({
         type: ORDER_TYPE_MUTATION,
@@ -156,10 +202,12 @@ export default {
 
 <style lang="scss" scoped>
 @import "~global";
+#map {
+  height: 100%;
+  width: 100%;
+}
 
 .order-view {
-  min-height: 350px;
-  max-height: 350px;
   height: 75%;
 }
 
@@ -189,6 +237,7 @@ export default {
   width: 90%;
   margin: 50px auto;
   height: 100%;
+  max-height: 350px;
   display: flex;
 
   &__list {
@@ -209,7 +258,7 @@ export default {
     }
 
     &::-webkit-scrollbar-thumb {
-      background: #666; 
+      background: #666;
     }
   }
 
