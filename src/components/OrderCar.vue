@@ -12,6 +12,7 @@
             maxlength="4"
             hint="2-4 symbols"
             @input="onInputId()"
+            @keyup.enter="onEnter(orderId)"
           ></v-text-field>
         </transition>
         <v-btn :class="['action-btn', 'by-id']" @click="onChangeType('id')">
@@ -25,9 +26,25 @@
     <div class="action-view">
       <div class="action-view__list">
         <div class="car-list">
-          <div v-for="(item, key) in getCarList" :key="item.id">
-            {{ key }} - {{ item.info.brand }}
-          </div>
+          <transition-group name="filter-cars" tag="div">
+            <div
+              v-for="item in getCarList"
+              :key="item.id"
+              ref="carList"
+              class="car-item"
+              :class="{ 'search-active': item.id === activeCar.id }"
+              :title="item.id"
+              @click="onClickCarItem(item.id)"
+            >
+              <img
+                class="car-item__image"
+                :src="getImgUrl(item.info.brand)"
+                alt="model"
+              />
+              {{ item.info.model }}
+              <span class="car-item__id">{{ item.id }}</span>
+            </div>
+          </transition-group>
         </div>
       </div>
       <div class="action-view__area">
@@ -53,7 +70,12 @@ export default {
   data() {
     return {
       orderId: "",
-      content: orderContent
+      content: orderContent,
+      activeCar: {
+        id: 10,
+        info: {}
+      },
+      carListUnWatch: null
     };
   },
   computed: {
@@ -65,6 +87,15 @@ export default {
   created() {
     this.$store.dispatch({
       type: CAR_INITIAL_LIST_ACTION
+    });
+
+    this.$store.subscribe(mutation => {
+      switch (mutation.type) {
+        case CAR_RESET_FILTRED_LIST_MUTATION:
+          // need for scrolling after Enter event in input
+          this.$nextTick(() => this.carListUnWatch && this.carListUnWatch());
+          return;
+      }
     });
   },
   methods: {
@@ -85,6 +116,39 @@ export default {
         type: CAR_FILTRED_LIST_ACTION,
         orderId: this.orderId
       });
+    },
+    getImgUrl(name) {
+      var images = require.context("../assets/cars_logo/", false, /\.png$/);
+      return images("./" + name.toLowerCase() + ".png");
+    },
+    onEnter(id) {
+      let filtredList = this.getCarList;
+      if (!filtredList.length) return;
+      let positionInList = this.setActiveCar(id);
+
+      this.carListUnWatch = this.$watch("getCarList", function() {
+        this.$refs.carList[positionInList].scrollIntoView();
+      });
+
+      this.orderId = "";
+      this.$store.commit({
+        type: CAR_RESET_FILTRED_LIST_MUTATION
+      });
+    },
+    onClickCarItem(id) {
+      this.setActiveCar(id);
+      this.orderId = "";
+    },
+    setActiveCar(id) {
+      let filtredList = this.getCarList;
+
+      for (let i = 0; i < filtredList.length; i++) {
+        if (filtredList[i].id === id) {
+          this.activeCar.id = id;
+          this.activeCar.info = filtredList[i].info;
+          return i; // position car in list
+        }
+      }
     }
   }
 };
@@ -94,7 +158,8 @@ export default {
 @import "~global";
 
 .order-view {
-  min-height: 500px;
+  min-height: 350px;
+  max-height: 350px;
   height: 75%;
 }
 
@@ -132,6 +197,20 @@ export default {
     border: 2px solid $color-tile-order;
     border-right-width: 1px;
     border-radius: 15px 0 0 15px;
+
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #ddd;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #666; 
+    }
   }
 
   &__area {
@@ -140,6 +219,47 @@ export default {
     border-radius: 0 15px 15px 0;
     border-left-width: 1px;
     width: 100%;
+  }
+}
+
+.car-item {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 10px 5px;
+  transition: 0.2s;
+  user-select: none;
+
+  &:first-child {
+    border-top-left-radius: 13px;
+  }
+
+  &.search-active {
+    background-color: $color-light-grey;
+
+    & + .car-item:hover {
+      @include shadow-between-items;
+    }
+  }
+
+  &__image {
+    width: 20px;
+    height: 20px;
+    margin: 0 10px;
+  }
+
+  &__id {
+    margin-left: auto;
+    font-size: 10px;
+    color: $color-light-grey;
+  }
+
+  &:hover {
+    background-color: $color-light-grey;
+
+    & + .search-active {
+      @include shadow-between-items;
+    }
   }
 }
 </style>

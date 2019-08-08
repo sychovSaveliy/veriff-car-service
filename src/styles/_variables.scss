@@ -1,5 +1,6 @@
 $default-color: aqua;
 $color-white: #fff;
+$color-light-grey: rgba(0, 0, 0, 0.35);
 
 $color-tile-order: burlywood;
 $color-tile-return: lightcoral;
@@ -19,3 +20,12 @@ $fs_md: 24px;
 .fade-enter, .fade-leave-to {
     opacity: 0;
 }
+
+.filter-cars-move {
+    transition: transform .3s;
+}
+
+@mixin shadow-between-items {
+  box-shadow: inset 0px 2px 1px 0px rgba(0, 0, 0, 0.75);
+}
+

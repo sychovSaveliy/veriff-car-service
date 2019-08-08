@@ -31,7 +31,7 @@ export default {
         return console.warn("Invalid cars list: ", payload.cars);
       }
       state.cars = payload.cars;
-      state.initialCars = Object.assign({}, state.cars);
+      state.initialCars = [...state.cars];
     },
     [CAR_FILTRED_LIST_MUTATION](state, payload) {
       if (!payload || !payload.filtredCars) return;
@@ -53,13 +53,10 @@ export default {
       });
     },
     [CAR_FILTRED_LIST_ACTION]({ commit, state }, payload) {
-      let filtredCars = Object.assign({}, state.initialCars);
-      for (let id in filtredCars) {
-        if (id.indexOf(payload.orderId) === -1) {
-          delete filtredCars[id];
-        }
-      }
-
+      let filtredCars = [...state.initialCars];
+      filtredCars = filtredCars.filter(
+        car => car.id.indexOf(payload.orderId) !== -1
+      );
       commit({
         type: CAR_FILTRED_LIST_MUTATION,
         filtredCars

@@ -1,7 +1,8 @@
 {
     "data": {
-        "cars": {
-            "0001": {
+        "cars": [
+            {
+                "id": "0001",
                 "position": {
                     "lang": "",
                     "lat": ""
@@ -14,7 +15,8 @@
                     "seats": "5"
                 }
             },
-            "0002": {
+            {
+                "id": "0002",
                 "position": {
                     "lang": "",
                     "lat": ""
@@ -27,7 +29,8 @@
                     "seats": "7"
                 }
             },
-            "0003": {
+            {
+                "id": "0003",
                 "position": {
                     "lang": "",
                     "lat": ""
@@ -39,7 +42,231 @@
                     "year": "2007",
                     "seats": "5"
                 }
+            },
+            {
+                "id": "0004",
+                "position": {
+                    "lang": "",
+                    "lat": ""
+                },
+                "status": "ready",
+                "info": {
+                    "brand": "Toyota",
+                    "model": "Camry",
+                    "year": "2006",
+                    "seats": "5"
+                }
+            },
+            {
+                "id": "0005",
+                "position": {
+                    "lang": "",
+                    "lat": ""
+                },
+                "status": "ready",
+                "info": {
+                    "brand": "Toyota",
+                    "model": "Camry",
+                    "year": "2006",
+                    "seats": "5"
+                }
+            },
+            {
+                "id": "0006",
+                "position": {
+                    "lang": "",
+                    "lat": ""
+                },
+                "status": "ready",
+                "info": {
+                    "brand": "Audi",
+                    "model": "A4",
+                    "year": "2007",
+                    "seats": "5"
+                }
+            },
+            {
+                "id": "0007",
+                "position": {
+                    "lang": "",
+                    "lat": ""
+                },
+                "status": "ready",
+                "info": {
+                    "brand": "Toyota",
+                    "model": "Camry",
+                    "year": "2006",
+                    "seats": "5"
+                }
+            },
+            {
+                "id": "0008",
+                "position": {
+                    "lang": "",
+                    "lat": ""
+                },
+                "status": "ready",
+                "info": {
+                    "brand": "Toyota",
+                    "model": "Camry",
+                    "year": "2006",
+                    "seats": "5"
+                }
+            },
+            {
+                "id": "0009",
+                "position": {
+                    "lang": "",
+                    "lat": ""
+                },
+                "status": "ready",
+                "info": {
+                    "brand": "Audi",
+                    "model": "A4",
+                    "year": "2007",
+                    "seats": "5"
+                }
+            },
+            {
+                "id": "0010",
+                "position": {
+                    "lang": "",
+                    "lat": ""
+                },
+                "status": "ready",
+                "info": {
+                    "brand": "Toyota",
+                    "model": "Camry",
+                    "year": "2006",
+                    "seats": "5"
+                }
+            },
+            {
+                "id": "0011",
+                "position": {
+                    "lang": "",
+                    "lat": ""
+                },
+                "status": "ready",
+                "info": {
+                    "brand": "Toyota",
+                    "model": "Camry",
+                    "year": "2006",
+                    "seats": "5"
+                }
+            },
+            {
+                "id": "0012",
+                "position": {
+                    "lang": "",
+                    "lat": ""
+                },
+                "status": "ready",
+                "info": {
+                    "brand": "Toyota",
+                    "model": "Camry",
+                    "year": "2006",
+                    "seats": "5"
+                }
+            },
+            {
+                "id": "0013",
+                "position": {
+                    "lang": "",
+                    "lat": ""
+                },
+                "status": "ready",
+                "info": {
+                    "brand": "Toyota",
+                    "model": "Camry",
+                    "year": "2006",
+                    "seats": "5"
+                }
+            },
+            {
+                "id": "0014",
+                "position": {
+                    "lang": "",
+                    "lat": ""
+                },
+                "status": "ready",
+                "info": {
+                    "brand": "Toyota",
+                    "model": "Camry",
+                    "year": "2006",
+                    "seats": "5"
+                }
+            },
+            {
+                "id": "0015",
+                "position": {
+                    "lang": "",
+                    "lat": ""
+                },
+                "status": "ready",
+                "info": {
+                    "brand": "Toyota",
+                    "model": "Camry",
+                    "year": "2006",
+                    "seats": "5"
+                }
+            },
+            {
+                "id": "0016",
+                "position": {
+                    "lang": "",
+                    "lat": ""
+                },
+                "status": "ready",
+                "info": {
+                    "brand": "Toyota",
+                    "model": "Camry",
+                    "year": "2006",
+                    "seats": "5"
+                }
+            },
+            {
+                "id": "0017",
+                "position": {
+                    "lang": "",
+                    "lat": ""
+                },
+                "status": "ready",
+                "info": {
+                    "brand": "Toyota",
+                    "model": "Camry",
+                    "year": "2006",
+                    "seats": "5"
+                }
+            },
+            {
+                "id": "0018",
+                "position": {
+                    "lang": "",
+                    "lat": ""
+                },
+                "status": "ready",
+                "info": {
+                    "brand": "Toyota",
+                    "model": "Camry",
+                    "year": "2006",
+                    "seats": "5"
+                }
+            },
+            {
+                "id": "0019",
+                "position": {
+                    "lang": "",
+                    "lat": ""
+                },
+                "status": "ready",
+                "info": {
+                    "brand": "Toyota",
+                    "model": "Camry",
+                    "year": "2006",
+                    "seats": "5"
+                }
             }
-        }
+        ]
     }
 }
