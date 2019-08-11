@@ -10,8 +10,12 @@
 </template>
 
 <script>
-import { choosingContent } from "@/services/Content.serivce.js";
+import { Service } from "@/services";
+const {
+  Content: { choosingContent }
+} = Service;
 import * as Routes from "../router";
+
 export default {
   data() {
     return {

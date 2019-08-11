@@ -25,7 +25,11 @@
 
 <script>
 import * as Routes from "../router";
-import { choosingContent } from "@/services/Content.serivce.js";
+import { Service } from "@/services";
+const {
+  Content: { choosingContent }
+} = Service;
+
 import MyPosition from "@/components/MyPosition.vue";
 export default {
   components: {

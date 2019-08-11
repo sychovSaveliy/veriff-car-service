@@ -1,6 +1,6 @@
 // services
-import API from "@/services/API.service.js";
-
+import { Service } from "@/services";
+const { API } = Service;
 // constants
 import {
   ORDER_TYPE_MUTATION,
@@ -9,7 +9,9 @@ import {
   CAR_INITIAL_LIST_MUTATION,
   CAR_FILTRED_LIST_MUTATION,
   CAR_RESET_FILTRED_LIST_MUTATION,
-  CAR_FILTRED_LIST_ACTION
+  CAR_FILTRED_LIST_ACTION,
+  INIT_USER_GEO_MUTATION,
+  INIT_USER_GEO_ACTION
 } from "./constants";
 
 export default {
@@ -20,7 +22,13 @@ export default {
     // TODO: merge cars related data to one structure
     cars: null,
     initialCars: null,
-    filtredCars: null
+    filtredCars: null,
+    user: {
+      position: {
+        lat: null,
+        lng: null
+      }
+    }
   },
   mutations: {
     [ORDER_TYPE_MUTATION](state, payload) {
@@ -39,6 +47,9 @@ export default {
     },
     [CAR_RESET_FILTRED_LIST_MUTATION](state) {
       state.cars = state.initialCars;
+    },
+    [INIT_USER_GEO_MUTATION](state, payload) {
+      state.user.position = payload.position;
     }
   },
   actions: {
@@ -61,6 +72,13 @@ export default {
         type: CAR_FILTRED_LIST_MUTATION,
         filtredCars
       });
+    },
+    [INIT_USER_GEO_ACTION]({ commit }, payload) {
+      // checking of position keys
+      commit({
+        type: INIT_USER_GEO_MUTATION,
+        position: payload.position
+      });
     }
   },
   getters: {
@@ -69,6 +87,9 @@ export default {
     },
     getCarList(state) {
       return state.cars;
+    },
+    getUser(state) {
+      return state.user;
     }
   }
 };

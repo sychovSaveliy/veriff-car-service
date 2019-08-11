@@ -13,20 +13,19 @@ const getPath = () =>
       }`
     : "";
 
-export default class {
-  static fetch(url, options = {}) {
-    if (!url) return;
-    if (options.body) {
-      options.body = JSON.stringify(options.body);
-    }
-    // options.headers.authorization = localStorage.getItem('jwt') || '';
-    options.headers = options.headers || {};
-    options.headers["Access-Control-Allow-Headers"] =
-      "Access-Control-Request-Headers,Content-Type";
-    options.headers["Content-Type"] = "application/json";
-
-    return fetch(`${getPath() + url}`, options)
-      .then(resp => resp.json())
-      .catch(console.warn);
+export const fetch = (url, options = {}) => {
+  if (!url) return;
+  if (options.body) {
+    options.body = JSON.stringify(options.body);
   }
-}
+  // options.headers.authorization = localStorage.getItem('jwt') || '';
+  options.headers = options.headers || {};
+  options.headers["Access-Control-Allow-Headers"] =
+    "Access-Control-Request-Headers,Content-Type";
+  options.headers["Content-Type"] = "application/json";
+
+  return window
+    .fetch(`${getPath() + url}`, options)
+    .then(resp => resp.json())
+    .catch(console.warn);
+};

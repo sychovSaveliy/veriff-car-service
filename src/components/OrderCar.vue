@@ -25,39 +25,34 @@
     </div>
     <div class="action-view">
       <div class="action-view__list">
-        <div class="car-list">
-          <transition-group name="filter-cars" tag="div">
-            <div
-              v-for="item in getCarList"
-              :key="item.id"
-              ref="carList"
-              class="car-item"
-              :class="{ 'search-active': item.id === activeCar.id }"
-              :title="item.id"
-              @click="onClickCarItem(item.id)"
-            >
-              <img
-                class="car-item__image"
-                :src="getImgUrl(item.info.brand)"
-                alt="model"
-              />
-              {{ item.info.model }}
-              <span class="car-item__id">{{ item.id }}</span>
-            </div>
-          </transition-group>
-        </div>
+        <transition-group class="car-list" name="filter-cars" tag="div">
+          <div
+            v-for="item in getCarList"
+            :key="item.id"
+            ref="carList"
+            class="car-item"
+            :class="{ 'search-active': item.id === activeCar.id }"
+            :title="item.id"
+            @click="onClickCarItem(item.id)"
+          >
+            <img
+              class="car-item__image"
+              :src="getImgUrl(item.info.brand)"
+              alt="model"
+            />
+            {{ item.info.model }}
+            <span class="car-item__id">{{ item.id }}</span>
+          </div>
+        </transition-group>
       </div>
       <div class="action-view__area">
         <div id="map">
-          <gmap-map
-            :center="map.center"
-            :zoom="12"
-            style="width:100%;  height: 400px;"
-          >
+          <gmap-map :center="map.center" :zoom="15">
             <gmap-marker
               v-for="(m, index) in map.markers"
               :key="index"
               :position="m.position"
+              :icon="m.icon"
               @click="map.center = m.position"
             ></gmap-marker>
           </gmap-map>
@@ -69,12 +64,17 @@
 
 <script>
 import { mapGetters } from "vuex";
-import { orderContent } from "@/services/Content.serivce.js";
+import { Service } from "@/services";
+const {
+  Content: { orderContent }
+} = Service;
+
 import {
   ORDER_TYPE_MUTATION,
   CAR_INITIAL_LIST_ACTION,
   CAR_FILTRED_LIST_ACTION,
-  CAR_RESET_FILTRED_LIST_MUTATION
+  CAR_RESET_FILTRED_LIST_MUTATION,
+  INIT_USER_GEO_ACTION
 } from "@/store/constants";
 
 export default {
@@ -125,12 +125,15 @@ export default {
     addMarker() {
       if (this.map.currentPlace) {
         const marker = {
-          lat: this.map.currentPlace.geometry.location.lat(),
-          lng: this.map.currentPlace.geometry.location.lng()
+          position: {
+            lat: this.map.currentPlace.geometry.location.lat(),
+            lng: this.map.currentPlace.geometry.location.lng()
+          },
+          icon: this.getImgUrl("car")
         };
-        this.map.markers.push({ position: marker });
+        this.map.markers.push(marker);
         this.map.places.push(this.currentPlace);
-        this.map.center = marker;
+        this.map.center = marker.position;
         this.map.currentPlace = null;
       }
     },
@@ -142,7 +145,14 @@ export default {
         };
         this.map.center = coords;
 
-        this.map.markers.push({ position: coords });
+        this.map.markers.push({
+          position: coords,
+          icon: this.getImgUrl("user")
+        });
+        this.$store.dispatch({
+          type: INIT_USER_GEO_ACTION,
+          position: coords
+        });
       });
     },
     onChangeType(type) {
@@ -233,6 +243,10 @@ export default {
   max-width: 80px;
 }
 
+.car-list {
+  max-height: 100%;
+}
+
 .action-view {
   width: 90%;
   margin: 50px auto;
@@ -268,6 +282,7 @@ export default {
     border-radius: 0 15px 15px 0;
     border-left-width: 1px;
     width: 100%;
+    overflow: hidden;
   }
 }
 
@@ -309,6 +324,13 @@ export default {
     & + .search-active {
       @include shadow-between-items;
     }
+  }
+}
+
+#map {
+  .vue-map-container {
+    width: 100%;
+    height: 100%;
   }
 }
 </style>
