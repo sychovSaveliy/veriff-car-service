@@ -3,15 +3,33 @@
     <div class="additional-header">
       <h4 class="additional-header__title">{{ content.title }}</h4>
     </div>
-    Lat: {{ getUser.position.lat }}
-    <br />
-    Lng: {{ getUser.position.lng }}
+    <v-container grid-list-md text-center>
+      <v-layout wrap>
+        <v-flex md4>
+          Lat: {{ getUser.position.lat }}
+          <br />
+          Lng: {{ getUser.position.lng }}
+        </v-flex>
+        <v-flex md4>
+          <v-btn @click="geolocate()">
+            {{ content.reInitPosition }}
+          </v-btn>
+        </v-flex>
+        <v-flex md4>
+          {{ getMap }}
+        </v-flex>
+      </v-layout>
+    </v-container>
   </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
-import { additionalContent } from "@/services/Content.service.js";
+import { Service } from "@/services";
+const {
+  Content: { additionalContent },
+  Geolocation
+} = Service;
 
 export default {
   data() {
@@ -21,11 +39,18 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["getUser"])
+    ...mapGetters(["getUser", "getMap"])
   },
   methods: {
     applyPosition(position) {
       this.position = position;
+    },
+    geolocate() {
+      let map = this.getMap;
+      map.markers = [];
+      Geolocation.getCurrentPosition(this.getMap, {
+        store: this.$store
+      });
     }
   }
 };

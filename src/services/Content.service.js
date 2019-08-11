@@ -12,7 +12,8 @@ const orderContent = {
 };
 
 const additionalContent = {
-  title: "Data managment"
+  title: "Data managment",
+  reInitPosition: "Recalculate position"
 };
 
 export { choosingContent, orderContent, additionalContent };

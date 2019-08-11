@@ -64,17 +64,17 @@
 
 <script>
 import { mapGetters } from "vuex";
-import { Service } from "@/services";
+import { Service, getImgUrl } from "@/services";
 const {
-  Content: { orderContent }
+  Content: { orderContent },
+  Geolocation
 } = Service;
 
 import {
   ORDER_TYPE_MUTATION,
   CAR_INITIAL_LIST_ACTION,
   CAR_FILTRED_LIST_ACTION,
-  CAR_RESET_FILTRED_LIST_MUTATION,
-  INIT_USER_GEO_ACTION
+  CAR_RESET_FILTRED_LIST_MUTATION
 } from "@/store/constants";
 
 export default {
@@ -92,7 +92,8 @@ export default {
         markers: [],
         places: [],
         currentPlace: null
-      }
+      },
+      getImgUrl
     };
   },
   computed: {
@@ -123,36 +124,11 @@ export default {
       this.map.currentPlace = place;
     },
     addMarker() {
-      if (this.map.currentPlace) {
-        const marker = {
-          position: {
-            lat: this.map.currentPlace.geometry.location.lat(),
-            lng: this.map.currentPlace.geometry.location.lng()
-          },
-          icon: this.getImgUrl("car")
-        };
-        this.map.markers.push(marker);
-        this.map.places.push(this.currentPlace);
-        this.map.center = marker.position;
-        this.map.currentPlace = null;
-      }
+      Geolocation.addMarker(this.map);
     },
     geolocate: function() {
-      navigator.geolocation.getCurrentPosition(position => {
-        const coords = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-        };
-        this.map.center = coords;
-
-        this.map.markers.push({
-          position: coords,
-          icon: this.getImgUrl("user")
-        });
-        this.$store.dispatch({
-          type: INIT_USER_GEO_ACTION,
-          position: coords
-        });
+      Geolocation.getCurrentPosition(this.map, {
+        store: this.$store
       });
     },
     onChangeType(type) {
@@ -172,10 +148,6 @@ export default {
         type: CAR_FILTRED_LIST_ACTION,
         orderId: this.orderId
       });
-    },
-    getImgUrl(name) {
-      var images = require.context("../assets/cars_logo/", false, /\.png$/);
-      return images("./" + name.toLowerCase() + ".png");
     },
     onEnter(id) {
       let filtredList = this.getCarList;

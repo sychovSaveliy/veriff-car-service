@@ -11,7 +11,8 @@ import {
   CAR_RESET_FILTRED_LIST_MUTATION,
   CAR_FILTRED_LIST_ACTION,
   INIT_USER_GEO_MUTATION,
-  INIT_USER_GEO_ACTION
+  INIT_USER_GEO_ACTION,
+  MAP_MUTATION
 } from "./constants";
 
 export default {
@@ -28,7 +29,8 @@ export default {
         lat: null,
         lng: null
       }
-    }
+    },
+    map: null
   },
   mutations: {
     [ORDER_TYPE_MUTATION](state, payload) {
@@ -50,6 +52,9 @@ export default {
     },
     [INIT_USER_GEO_MUTATION](state, payload) {
       state.user.position = payload.position;
+    },
+    [MAP_MUTATION](state, payload) {
+      state.map = payload.map;
     }
   },
   actions: {
@@ -79,6 +84,11 @@ export default {
         type: INIT_USER_GEO_MUTATION,
         position: payload.position
       });
+
+      commit({
+        type: MAP_MUTATION,
+        map: payload.map
+      });
     }
   },
   getters: {
@@ -90,6 +100,9 @@ export default {
     },
     getUser(state) {
       return state.user;
+    },
+    getMap(state) {
+      return state.map;
     }
   }
 };
