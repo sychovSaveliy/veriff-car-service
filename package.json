@@ -9,7 +9,7 @@
         "test:unit": "vue-cli-service test:unit",
         "mock": "npm run build && node server.js",
         "postinstall": "npm run build",
-        "start": "node server.js"
+        "start": "node ./server"
     },
     "dependencies": {
         "core-js": "^2.6.5",

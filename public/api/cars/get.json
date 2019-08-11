@@ -2,268 +2,652 @@
     "data": {
         "cars": [
             {
-                "id": "0001",
+                "id": "2954",
                 "position": {
-                    "lang": "",
-                    "lat": ""
+                    "lng": 30.5249008,
+                    "lat": 50.446900799999995
                 },
-                "status": "ready",
                 "info": {
-                    "brand": "Toyota",
-                    "model": "Corolla",
-                    "year": "2006",
+                    "brand": "Audi",
+                    "model": "A4",
+                    "year": 2007,
                     "seats": "5"
                 }
             },
             {
-                "id": "0002",
+                "id": "2955",
                 "position": {
-                    "lang": "",
-                    "lat": ""
+                    "lng": 30.528900800000002,
+                    "lat": 50.4729008
                 },
-                "status": "ready",
+                "info": {
+                    "brand": "Audi",
+                    "model": "A6",
+                    "year": 2005,
+                    "seats": "5"
+                }
+            },
+            {
+                "id": "2956",
+                "position": {
+                    "lng": 30.4699008,
+                    "lat": 50.4669008
+                },
+                "info": {
+                    "brand": "Mercedes",
+                    "model": "C-class",
+                    "year": 2005,
+                    "seats": "5"
+                }
+            },
+            {
+                "id": "2957",
+                "position": {
+                    "lng": 30.474900800000004,
+                    "lat": 50.473900799999996
+                },
                 "info": {
                     "brand": "Mercedes",
                     "model": "E-class",
-                    "year": "2009",
+                    "year": 2003,
+                    "seats": "5"
+                }
+            },
+            {
+                "id": "2958",
+                "position": {
+                    "lng": 30.519900800000002,
+                    "lat": 50.47190079999999
+                },
+                "info": {
+                    "brand": "Toyota",
+                    "model": "Corolla",
+                    "year": 2006,
+                    "seats": "5"
+                }
+            },
+            {
+                "id": "2959",
+                "position": {
+                    "lng": 30.529900800000004,
+                    "lat": 50.486900799999994
+                },
+                "info": {
+                    "brand": "Mercedes",
+                    "model": "C-class",
+                    "year": 2009,
+                    "seats": "5"
+                }
+            },
+            {
+                "id": "2960",
+                "position": {
+                    "lng": 30.4869008,
+                    "lat": 50.458900799999995
+                },
+                "info": {
+                    "brand": "Audi",
+                    "model": "A6",
+                    "year": 2005,
+                    "seats": "5"
+                }
+            },
+            {
+                "id": "2961",
+                "position": {
+                    "lng": 30.503900800000004,
+                    "lat": 50.4789008
+                },
+                "info": {
+                    "brand": "Mercedes",
+                    "model": "V-class",
+                    "year": 2007,
                     "seats": "7"
                 }
             },
             {
-                "id": "0003",
+                "id": "2962",
                 "position": {
-                    "lang": "",
-                    "lat": ""
+                    "lng": 30.5369008,
+                    "lat": 50.483900799999994
                 },
-                "status": "ready",
+                "info": {
+                    "brand": "Toyota",
+                    "model": "Camry",
+                    "year": 2009,
+                    "seats": "5"
+                }
+            },
+            {
+                "id": "2963",
+                "position": {
+                    "lng": 30.496900800000002,
+                    "lat": 50.458900799999995
+                },
+                "info": {
+                    "brand": "Volkswagen",
+                    "model": "Golf",
+                    "year": 2003,
+                    "seats": "5"
+                }
+            },
+            {
+                "id": "2964",
+                "position": {
+                    "lng": 30.468900800000004,
+                    "lat": 50.4759008
+                },
+                "info": {
+                    "brand": "Toyota",
+                    "model": "Auris",
+                    "year": 2008,
+                    "seats": "5"
+                }
+            },
+            {
+                "id": "2965",
+                "position": {
+                    "lng": 30.519900800000002,
+                    "lat": 50.488900799999996
+                },
+                "info": {
+                    "brand": "Toyota",
+                    "model": "Camry",
+                    "year": 2004,
+                    "seats": "5"
+                }
+            },
+            {
+                "id": "2966",
+                "position": {
+                    "lng": 30.5099008,
+                    "lat": 50.473900799999996
+                },
+                "info": {
+                    "brand": "Mercedes",
+                    "model": "V-class",
+                    "year": 2004,
+                    "seats": "7"
+                }
+            },
+            {
+                "id": "2967",
+                "position": {
+                    "lng": 30.528900800000002,
+                    "lat": 50.4819008
+                },
+                "info": {
+                    "brand": "Toyota",
+                    "model": "Auris",
+                    "year": 2008,
+                    "seats": "5"
+                }
+            },
+            {
+                "id": "2968",
+                "position": {
+                    "lng": 30.496900800000002,
+                    "lat": 50.45090079999999
+                },
+                "info": {
+                    "brand": "Mercedes",
+                    "model": "C-class",
+                    "year": 2006,
+                    "seats": "5"
+                }
+            },
+            {
+                "id": "2969",
+                "position": {
+                    "lng": 30.497900800000004,
+                    "lat": 50.452900799999995
+                },
+                "info": {
+                    "brand": "Mercedes",
+                    "model": "E-class",
+                    "year": 2003,
+                    "seats": "5"
+                }
+            },
+            {
+                "id": "2970",
+                "position": {
+                    "lng": 30.473900800000003,
+                    "lat": 50.47790079999999
+                },
+                "info": {
+                    "brand": "Volkswagen",
+                    "model": "Sharan",
+                    "year": 2006,
+                    "seats": "7"
+                }
+            },
+            {
+                "id": "2971",
+                "position": {
+                    "lng": 30.529900800000004,
+                    "lat": 50.46590079999999
+                },
+                "info": {
+                    "brand": "Volkswagen",
+                    "model": "Arteon",
+                    "year": 2003,
+                    "seats": "5"
+                }
+            },
+            {
+                "id": "2972",
+                "position": {
+                    "lng": 30.528900800000002,
+                    "lat": 50.470900799999995
+                },
+                "info": {
+                    "brand": "Toyota",
+                    "model": "Auris",
+                    "year": 2008,
+                    "seats": "5"
+                }
+            },
+            {
+                "id": "2973",
+                "position": {
+                    "lng": 30.4899008,
+                    "lat": 50.4489008
+                },
+                "info": {
+                    "brand": "Audi",
+                    "model": "A5",
+                    "year": 2009,
+                    "seats": "5"
+                }
+            },
+            {
+                "id": "2974",
+                "position": {
+                    "lng": 30.4989008,
+                    "lat": 50.47790079999999
+                },
+                "info": {
+                    "brand": "Toyota",
+                    "model": "Auris",
+                    "year": 2005,
+                    "seats": "5"
+                }
+            },
+            {
+                "id": "2975",
+                "position": {
+                    "lng": 30.517900800000003,
+                    "lat": 50.489900799999994
+                },
+                "info": {
+                    "brand": "Volkswagen",
+                    "model": "Golf",
+                    "year": 2009,
+                    "seats": "5"
+                }
+            },
+            {
+                "id": "2976",
+                "position": {
+                    "lng": 30.529900800000004,
+                    "lat": 50.486900799999994
+                },
+                "info": {
+                    "brand": "Audi",
+                    "model": "A5",
+                    "year": 2005,
+                    "seats": "5"
+                }
+            },
+            {
+                "id": "2977",
+                "position": {
+                    "lng": 30.484900800000002,
+                    "lat": 50.4789008
+                },
+                "info": {
+                    "brand": "Mercedes",
+                    "model": "C-class",
+                    "year": 2008,
+                    "seats": "5"
+                }
+            },
+            {
+                "id": "2978",
+                "position": {
+                    "lng": 30.4839008,
+                    "lat": 50.4519008
+                },
                 "info": {
                     "brand": "Audi",
                     "model": "A4",
-                    "year": "2007",
+                    "year": 2007,
                     "seats": "5"
                 }
             },
             {
-                "id": "0004",
+                "id": "2979",
                 "position": {
-                    "lang": "",
-                    "lat": ""
+                    "lng": 30.484900800000002,
+                    "lat": 50.458900799999995
                 },
-                "status": "ready",
                 "info": {
                     "brand": "Toyota",
                     "model": "Camry",
-                    "year": "2006",
+                    "year": 2006,
                     "seats": "5"
                 }
             },
             {
-                "id": "0005",
+                "id": "2980",
                 "position": {
-                    "lang": "",
-                    "lat": ""
+                    "lng": 30.5309008,
+                    "lat": 50.46590079999999
                 },
-                "status": "ready",
+                "info": {
+                    "brand": "Audi",
+                    "model": "A5",
+                    "year": 2007,
+                    "seats": "5"
+                }
+            },
+            {
+                "id": "2981",
+                "position": {
+                    "lng": 30.468900800000004,
+                    "lat": 50.488900799999996
+                },
+                "info": {
+                    "brand": "Mercedes",
+                    "model": "E-class",
+                    "year": 2005,
+                    "seats": "5"
+                }
+            },
+            {
+                "id": "2982",
+                "position": {
+                    "lng": 30.493900800000002,
+                    "lat": 50.464900799999995
+                },
+                "info": {
+                    "brand": "Audi",
+                    "model": "A5",
+                    "year": 2006,
+                    "seats": "5"
+                }
+            },
+            {
+                "id": "2983",
+                "position": {
+                    "lng": 30.5099008,
+                    "lat": 50.455900799999995
+                },
+                "info": {
+                    "brand": "Volkswagen",
+                    "model": "Golf",
+                    "year": 2009,
+                    "seats": "5"
+                }
+            },
+            {
+                "id": "2984",
+                "position": {
+                    "lng": 30.532900800000004,
+                    "lat": 50.47790079999999
+                },
+                "info": {
+                    "brand": "Toyota",
+                    "model": "Corolla",
+                    "year": 2008,
+                    "seats": "5"
+                }
+            },
+            {
+                "id": "2985",
+                "position": {
+                    "lng": 30.477900800000004,
+                    "lat": 50.4789008
+                },
+                "info": {
+                    "brand": "Audi",
+                    "model": "A6",
+                    "year": 2003,
+                    "seats": "5"
+                }
+            },
+            {
+                "id": "2986",
+                "position": {
+                    "lng": 30.5109008,
+                    "lat": 50.4489008
+                },
+                "info": {
+                    "brand": "Mercedes",
+                    "model": "V-class",
+                    "year": 2008,
+                    "seats": "7"
+                }
+            },
+            {
+                "id": "2987",
+                "position": {
+                    "lng": 30.499900800000002,
+                    "lat": 50.458900799999995
+                },
+                "info": {
+                    "brand": "Mercedes",
+                    "model": "E-class",
+                    "year": 2003,
+                    "seats": "5"
+                }
+            },
+            {
+                "id": "2988",
+                "position": {
+                    "lng": 30.4899008,
+                    "lat": 50.45990079999999
+                },
+                "info": {
+                    "brand": "Volkswagen",
+                    "model": "Golf",
+                    "year": 2004,
+                    "seats": "5"
+                }
+            },
+            {
+                "id": "2989",
+                "position": {
+                    "lng": 30.5079008,
+                    "lat": 50.455900799999995
+                },
+                "info": {
+                    "brand": "Toyota",
+                    "model": "Corolla",
+                    "year": 2009,
+                    "seats": "5"
+                }
+            },
+            {
+                "id": "2990",
+                "position": {
+                    "lng": 30.532900800000004,
+                    "lat": 50.4909008
+                },
+                "info": {
+                    "brand": "Toyota",
+                    "model": "Auris",
+                    "year": 2009,
+                    "seats": "5"
+                }
+            },
+            {
+                "id": "2991",
+                "position": {
+                    "lng": 30.474900800000004,
+                    "lat": 50.4639008
+                },
                 "info": {
                     "brand": "Toyota",
                     "model": "Camry",
-                    "year": "2006",
+                    "year": 2003,
                     "seats": "5"
                 }
             },
             {
-                "id": "0006",
+                "id": "2992",
                 "position": {
-                    "lang": "",
-                    "lat": ""
+                    "lng": 30.523900800000003,
+                    "lat": 50.46890079999999
                 },
-                "status": "ready",
                 "info": {
                     "brand": "Audi",
                     "model": "A4",
-                    "year": "2007",
+                    "year": 2006,
                     "seats": "5"
                 }
             },
             {
-                "id": "0007",
+                "id": "2993",
                 "position": {
-                    "lang": "",
-                    "lat": ""
+                    "lng": 30.497900800000004,
+                    "lat": 50.45690079999999
                 },
-                "status": "ready",
+                "info": {
+                    "brand": "Audi",
+                    "model": "A6",
+                    "year": 2003,
+                    "seats": "5"
+                }
+            },
+            {
+                "id": "2994",
+                "position": {
+                    "lng": 30.4729008,
+                    "lat": 50.4849008
+                },
                 "info": {
                     "brand": "Toyota",
                     "model": "Camry",
-                    "year": "2006",
+                    "year": 2007,
                     "seats": "5"
                 }
             },
             {
-                "id": "0008",
+                "id": "2995",
                 "position": {
-                    "lang": "",
-                    "lat": ""
+                    "lng": 30.488900800000003,
+                    "lat": 50.470900799999995
                 },
-                "status": "ready",
-                "info": {
-                    "brand": "Toyota",
-                    "model": "Camry",
-                    "year": "2006",
-                    "seats": "5"
-                }
-            },
-            {
-                "id": "0009",
-                "position": {
-                    "lang": "",
-                    "lat": ""
-                },
-                "status": "ready",
                 "info": {
                     "brand": "Audi",
                     "model": "A4",
-                    "year": "2007",
+                    "year": 2003,
                     "seats": "5"
                 }
             },
             {
-                "id": "0010",
+                "id": "2996",
                 "position": {
-                    "lang": "",
-                    "lat": ""
+                    "lng": 30.4699008,
+                    "lat": 50.46590079999999
                 },
-                "status": "ready",
                 "info": {
-                    "brand": "Toyota",
-                    "model": "Camry",
-                    "year": "2006",
+                    "brand": "Volkswagen",
+                    "model": "Arteon",
+                    "year": 2009,
                     "seats": "5"
                 }
             },
             {
-                "id": "0011",
+                "id": "2997",
                 "position": {
-                    "lang": "",
-                    "lat": ""
+                    "lng": 30.481900800000002,
+                    "lat": 50.45990079999999
                 },
-                "status": "ready",
                 "info": {
-                    "brand": "Toyota",
-                    "model": "Camry",
-                    "year": "2006",
+                    "brand": "Mercedes",
+                    "model": "V-class",
+                    "year": 2003,
+                    "seats": "7"
+                }
+            },
+            {
+                "id": "2998",
+                "position": {
+                    "lng": 30.5399008,
+                    "lat": 50.449900799999995
+                },
+                "info": {
+                    "brand": "Mercedes",
+                    "model": "C-class",
+                    "year": 2008,
                     "seats": "5"
                 }
             },
             {
-                "id": "0012",
+                "id": "2999",
                 "position": {
-                    "lang": "",
-                    "lat": ""
+                    "lng": 30.468900800000004,
+                    "lat": 50.479900799999996
                 },
-                "status": "ready",
                 "info": {
-                    "brand": "Toyota",
-                    "model": "Camry",
-                    "year": "2006",
+                    "brand": "Audi",
+                    "model": "A4",
+                    "year": 2005,
                     "seats": "5"
                 }
             },
             {
-                "id": "0013",
+                "id": "3000",
                 "position": {
-                    "lang": "",
-                    "lat": ""
+                    "lng": 30.513900800000002,
+                    "lat": 50.4759008
                 },
-                "status": "ready",
                 "info": {
                     "brand": "Toyota",
-                    "model": "Camry",
-                    "year": "2006",
+                    "model": "Corolla",
+                    "year": 2005,
                     "seats": "5"
                 }
             },
             {
-                "id": "0014",
+                "id": "3001",
                 "position": {
-                    "lang": "",
-                    "lat": ""
+                    "lng": 30.502900800000003,
+                    "lat": 50.489900799999994
                 },
-                "status": "ready",
                 "info": {
-                    "brand": "Toyota",
-                    "model": "Camry",
-                    "year": "2006",
-                    "seats": "5"
+                    "brand": "Mercedes",
+                    "model": "V-class",
+                    "year": 2006,
+                    "seats": "7"
                 }
             },
             {
-                "id": "0015",
+                "id": "3002",
                 "position": {
-                    "lang": "",
-                    "lat": ""
+                    "lng": 30.4959008,
+                    "lat": 50.488900799999996
                 },
-                "status": "ready",
                 "info": {
-                    "brand": "Toyota",
-                    "model": "Camry",
-                    "year": "2006",
-                    "seats": "5"
+                    "brand": "Volkswagen",
+                    "model": "Sharan",
+                    "year": 2009,
+                    "seats": "7"
                 }
             },
             {
-                "id": "0016",
+                "id": "3003",
                 "position": {
-                    "lang": "",
-                    "lat": ""
+                    "lng": 30.499900800000002,
+                    "lat": 50.45990079999999
                 },
-                "status": "ready",
                 "info": {
-                    "brand": "Toyota",
-                    "model": "Camry",
-                    "year": "2006",
-                    "seats": "5"
-                }
-            },
-            {
-                "id": "0017",
-                "position": {
-                    "lang": "",
-                    "lat": ""
-                },
-                "status": "ready",
-                "info": {
-                    "brand": "Toyota",
-                    "model": "Camry",
-                    "year": "2006",
-                    "seats": "5"
-                }
-            },
-            {
-                "id": "0018",
-                "position": {
-                    "lang": "",
-                    "lat": ""
-                },
-                "status": "ready",
-                "info": {
-                    "brand": "Toyota",
-                    "model": "Camry",
-                    "year": "2006",
-                    "seats": "5"
-                }
-            },
-            {
-                "id": "0019",
-                "position": {
-                    "lang": "",
-                    "lat": ""
-                },
-                "status": "ready",
-                "info": {
-                    "brand": "Toyota",
-                    "model": "Camry",
-                    "year": "2006",
+                    "brand": "Audi",
+                    "model": "A6",
+                    "year": 2005,
                     "seats": "5"
                 }
             }

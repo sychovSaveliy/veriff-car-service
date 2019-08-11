@@ -11,12 +11,12 @@
           Lng: {{ getUser.position.lng }}
         </v-flex>
         <v-flex md4>
-          <v-btn @click="geolocate()">
+          <v-btn class="managment-action" @click="geolocate()">
             {{ content.reInitPosition }}
           </v-btn>
-        </v-flex>
-        <v-flex md4>
-          {{ getMap }}
+          <v-btn class="managment-action" @click="emulateCars()">
+            {{ content.emulateCars }}
+          </v-btn>
         </v-flex>
       </v-layout>
     </v-container>
@@ -25,31 +25,46 @@
 
 <script>
 import { mapGetters } from "vuex";
+import { CAR_INITIAL_LIST_MUTATION } from "@/store/constants";
 import { Service } from "@/services";
 const {
   Content: { additionalContent },
-  Geolocation
+  Geolocation,
+  API
 } = Service;
 
 export default {
   data() {
     return {
-      content: additionalContent,
-      position: {}
+      content: additionalContent
     };
   },
   computed: {
     ...mapGetters(["getUser", "getMap"])
   },
   methods: {
-    applyPosition(position) {
-      this.position = position;
-    },
     geolocate() {
-      let map = this.getMap;
-      map.markers = [];
-      Geolocation.getCurrentPosition(this.getMap, {
+      let map = this.getMap || {};
+      Geolocation.getCurrentPosition(map, {
         store: this.$store
+      });
+    },
+    emulateCars() {
+      if (!confirm("Remove list of cars and create new 50 cars")) return;
+      localStorage.removeItem("cars");
+
+      API.fetch("/emulate", {
+        method: "POST",
+        body: {
+          position: this.getUser.position,
+          size: 50
+        }
+      }).then(this.initCarsAfterEmulation);
+    },
+    initCarsAfterEmulation(cars) {
+      this.$store.commit({
+        type: CAR_INITIAL_LIST_MUTATION,
+        cars
       });
     }
   }
@@ -67,5 +82,9 @@ export default {
   &__title {
     text-align: center;
   }
+}
+
+.managment-action {
+  margin: 0 10px 10px;
 }
 </style>

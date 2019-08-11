@@ -1,6 +1,6 @@
 // services
 import { Service } from "@/services";
-const { API } = Service;
+const { API, Geolocation } = Service;
 // constants
 import {
   ORDER_TYPE_MUTATION,
@@ -40,8 +40,12 @@ export default {
       if (!payload || !payload.cars) {
         return console.warn("Invalid cars list: ", payload.cars);
       }
-      state.cars = payload.cars;
-      state.initialCars = [...state.cars];
+
+      Geolocation.defineNearestRoads(payload.cars).then(cars => {
+        state.cars = cars;
+        state.initialCars = [...state.cars];
+        localStorage.cars = JSON.stringify(cars);
+      });
     },
     [CAR_FILTRED_LIST_MUTATION](state, payload) {
       if (!payload || !payload.filtredCars) return;
@@ -60,7 +64,14 @@ export default {
   actions: {
     [CAR_INITIAL_LIST_ACTION]({ commit, state }) {
       if (state.cars) return;
+      if (localStorage.cars) {
+        commit({
+          type: CAR_INITIAL_LIST_MUTATION,
+          cars: JSON.parse(localStorage.cars)
+        });
 
+        return;
+      }
       API.fetch("/cars").then(resp => {
         commit({
           type: CAR_INITIAL_LIST_MUTATION,

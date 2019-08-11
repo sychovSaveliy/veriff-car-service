@@ -47,13 +47,17 @@
       </div>
       <div class="action-view__area">
         <div id="map">
-          <gmap-map :center="map.center" :zoom="15">
+          <gmap-map :center="map.center" :zoom="14">
             <gmap-marker
               v-for="(m, index) in map.markers"
               :key="index"
               :position="m.position"
               :icon="m.icon"
-              @click="map.center = m.position"
+              :title="m.title"
+              @click="
+                map.center = m.position;
+                m.onClick(m);
+              "
             ></gmap-marker>
           </gmap-map>
         </div>
@@ -102,6 +106,22 @@ export default {
     },
     ...mapGetters(["getCarList"])
   },
+  watch: {
+    getCarList(newValue) {
+      if (!newValue.length) return;
+      this.map.markers = [];
+      this.geolocate();
+      newValue.forEach(car => {
+        this.addMarker({
+          map: this.map,
+          position: car.position,
+          title: car.status + "_" + car.id,
+          id: car.id,
+          handler: this.onEnter
+        });
+      });
+    }
+  },
   mounted() {
     this.geolocate();
   },
@@ -123,8 +143,8 @@ export default {
     setPlace(place) {
       this.map.currentPlace = place;
     },
-    addMarker() {
-      Geolocation.addMarker(this.map);
+    addMarker({ map, position, title, id, handler }) {
+      Geolocation.addMarker({ map, position, title, id, handler });
     },
     geolocate: function() {
       Geolocation.getCurrentPosition(this.map, {
@@ -154,9 +174,10 @@ export default {
       if (!filtredList.length) return;
       let positionInList = this.setActiveCar(id);
 
-      this.carListUnWatch = this.$watch("getCarList", function() {
-        this.$refs.carList[positionInList].scrollIntoView();
-      });
+      // TODO: Investigate animation behaviour
+      // this.carListUnWatch = this.$watch("getCarList", function() {
+      this.$refs.carList[positionInList].scrollIntoView();
+      // });
 
       this.orderId = "";
       this.$store.commit({

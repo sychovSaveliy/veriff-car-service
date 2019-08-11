@@ -2,7 +2,7 @@ let express = require("express");
 let app = express();
 let bodyParser = require("body-parser");
 var serveStatic = require("serve-static");
-let $data = require("./dist/routes/data");
+let $data = require("./../dist/routes/data");
 const port = process.env.PORT || 5000;
 app.use(
   bodyParser.urlencoded({
@@ -29,7 +29,7 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.use(serveStatic(__dirname + "/dist"));
+app.use(serveStatic(__dirname + "/../dist"));
 
 app.get("/", function(req, res) {
   return res.json({
@@ -40,6 +40,17 @@ app.route("/configs").get((req, res) => {
   res.json({
     PORT: port
   });
+});
+
+app.route("/emulate").post((req, res) => {
+  const { EmulateCars } = require("./Emulation");
+  let response = EmulateCars(req.body.size, req.body.position);
+  console.log(
+    `Emulate cars -> size = ${req.body.size}, user position ${JSON.stringify(
+      req.body.position
+    )}`
+  );
+  res.json(response);
 });
 
 app

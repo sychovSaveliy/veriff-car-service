@@ -8,11 +8,12 @@ export const CAR_FILTRED_LIST_MUTATION = "CAR_FILTRED_LIST_MUTATION";
 export const CAR_RESET_FILTRED_LIST_MUTATION =
   "CAR_RESET_FILTRED_LIST_MUTATION";
 
-// User Position
+// User Position and Markers
 export const INIT_USER_GEO_ACTION = "INIT_USER_GEO_ACTION";
 
 export const INIT_USER_GEO_MUTATION = "INIT_USER_GEO_MUTATION";
 export const MAP_MUTATION = "MAP_MUTATION";
+export const MARKERS_BY_CAR_LIST_MUTATION = "MARKERS_BY_CAR_LIST_MUTATION";
 
 // default values
 export const ORDER_TYPE_DEFAULT = "map";
