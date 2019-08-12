@@ -44,6 +44,7 @@ export default {
   align-items: flex-start;
   justify-content: center;
   padding-top: 30px;
+  user-select: none;
 
   &-tile {
     width: 300px;

@@ -3,7 +3,9 @@
     <v-app-bar app>
       <v-container class="app-bar">
         <span class="title" @click="onClickLogo">
-          Car rental service
+          Car rental service<span v-if="getRentedCar" class="font-weight-black">
+            | {{ getRentedCar.info.model }} in your hands!
+          </span>
         </span>
         <transition name="fade">
           <span
@@ -24,7 +26,8 @@
 </template>
 
 <script>
-import * as Routes from "../router";
+import { PATH_HOME } from "../router";
+import { mapGetters } from "vuex";
 import { Service } from "@/services";
 const {
   Content: { choosingContent }
@@ -40,6 +43,9 @@ export default {
       currentPage: this.switchPath()
     };
   },
+  computed: {
+    ...mapGetters(["getRentedCar"])
+  },
   watch: {
     $route() {
       this.currentPage = this.switchPath();
@@ -47,7 +53,7 @@ export default {
   },
   methods: {
     onClickLogo() {
-      this.$router.push(Routes.PATH_HOME);
+      this.$router.push(PATH_HOME);
     },
     switchPath() {
       switch (this.$router.history.current.name) {
@@ -81,6 +87,7 @@ export default {
 .title {
   cursor: pointer;
   margin-right: auto;
+  user-select: none;
 }
 
 .current-page-tab {

@@ -8,6 +8,14 @@ const orderContent = {
     text: "How find car?",
     byId: "I know ID",
     onMap: "On Map"
+  },
+  rentBtn: "Rent car",
+  carDesc: "Choosed car",
+  car: {
+    seats: "Seats: ",
+    year: "Year: ",
+    remove: "Remove",
+    proceed: "Proceed"
   }
 };
 

@@ -7,7 +7,10 @@ export function getCurrentPosition(map, { store }) {
       lat: position.coords.latitude,
       lng: position.coords.longitude
     };
-    map.center = coords;
+    centerMap({
+      map,
+      position: coords
+    });
 
     map.markers.push({
       position: coords,
@@ -20,6 +23,10 @@ export function getCurrentPosition(map, { store }) {
       map
     });
   });
+}
+
+export function centerMap({ map, position }) {
+  map.center = position;
 }
 
 export function addMarker({ map, position, title, id, handler = () => {} }) {

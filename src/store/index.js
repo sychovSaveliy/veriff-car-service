@@ -12,7 +12,8 @@ import {
   CAR_FILTRED_LIST_ACTION,
   INIT_USER_GEO_MUTATION,
   INIT_USER_GEO_ACTION,
-  MAP_MUTATION
+  MAP_MUTATION,
+  SET_RENTED_CAR_MUTATION
 } from "./constants";
 
 export default {
@@ -30,7 +31,8 @@ export default {
         lng: null
       }
     },
-    map: null
+    map: null,
+    rentedCar: null
   },
   mutations: {
     [ORDER_TYPE_MUTATION](state, payload) {
@@ -59,6 +61,9 @@ export default {
     },
     [MAP_MUTATION](state, payload) {
       state.map = payload.map;
+    },
+    [SET_RENTED_CAR_MUTATION](state, payload) {
+      state.rentedCar = payload.car;
     }
   },
   actions: {
@@ -114,6 +119,9 @@ export default {
     },
     getMap(state) {
       return state.map;
+    },
+    getRentedCar(state) {
+      return state.rentedCar;
     }
   }
 };

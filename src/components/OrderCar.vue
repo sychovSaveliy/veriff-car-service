@@ -33,7 +33,7 @@
             class="car-item"
             :class="{ 'search-active': item.id === activeCar.id }"
             :title="item.id"
-            @click="onClickCarItem(item.id)"
+            @click="onClickCarItem(item.id, item)"
           >
             <img
               class="car-item__image"
@@ -56,12 +56,43 @@
               :title="m.title"
               @click="
                 map.center = m.position;
-                m.onClick(m);
+                m.onClick && m.onClick(m);
               "
             ></gmap-marker>
           </gmap-map>
         </div>
       </div>
+    </div>
+    <div class="action-order">
+      <v-container grid-list-md>
+        <v-flex md4 offset-md4 text-center>
+          <v-btn @click="onSelectCar()">
+            {{ content.rentBtn }}
+          </v-btn>
+        </v-flex>
+        <v-flex v-if="selectedCar" md6 offset-md3>
+          <v-card>
+            <v-card-title>
+              {{ selectedCar.info.brand }} - {{ selectedCar.info.model }}
+            </v-card-title>
+            <v-card-text>
+              {{ content.car.seats }}{{ selectedCar.info.seats }}<br />
+              {{ content.car.year }}{{ selectedCar.info.year }}
+            </v-card-text>
+            <v-card-actions>
+              <v-btn text @click="onRemoveSelectedCar()">
+                {{ content.car.remove }}
+              </v-btn>
+              <v-btn text @click="onProceed()">
+                {{ content.car.proceed }}
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-flex>
+        <v-flex md4>
+          <v-form ref="form" v-model="valid"></v-form>
+        </v-flex>
+      </v-container>
     </div>
   </div>
 </template>
@@ -69,6 +100,7 @@
 <script>
 import { mapGetters } from "vuex";
 import { Service, getImgUrl } from "@/services";
+import { PATH_HOME } from "../router";
 const {
   Content: { orderContent },
   Geolocation
@@ -78,7 +110,8 @@ import {
   ORDER_TYPE_MUTATION,
   CAR_INITIAL_LIST_ACTION,
   CAR_FILTRED_LIST_ACTION,
-  CAR_RESET_FILTRED_LIST_MUTATION
+  CAR_RESET_FILTRED_LIST_MUTATION,
+  SET_RENTED_CAR_MUTATION
 } from "@/store/constants";
 
 export default {
@@ -97,14 +130,16 @@ export default {
         places: [],
         currentPlace: null
       },
-      getImgUrl
+      getImgUrl,
+      valid: false,
+      selectedCar: null
     };
   },
   computed: {
     getOrderType() {
       return this.$store.getters.getOrderType;
     },
-    ...mapGetters(["getCarList"])
+    ...mapGetters(["getCarList", "getRentedCar"])
   },
   watch: {
     getCarList(newValue) {
@@ -123,6 +158,9 @@ export default {
     }
   },
   mounted() {
+    if (this.getRentedCar) {
+      this.$router.push(PATH_HOME);
+    }
     this.geolocate();
   },
   created() {
@@ -184,9 +222,13 @@ export default {
         type: CAR_RESET_FILTRED_LIST_MUTATION
       });
     },
-    onClickCarItem(id) {
+    onClickCarItem(id, { position }) {
       this.setActiveCar(id);
       this.orderId = "";
+      Geolocation.centerMap({
+        map: this.map,
+        position
+      });
     },
     setActiveCar(id) {
       let filtredList = this.getCarList;
@@ -198,6 +240,20 @@ export default {
           return i; // position car in list
         }
       }
+    },
+    onSelectCar() {
+      this.selectedCar = this.activeCar;
+    },
+    onRemoveSelectedCar() {
+      this.selectedCar = null;
+    },
+    onProceed() {
+      this.$store.commit({
+        type: SET_RENTED_CAR_MUTATION,
+        car: this.selectedCar
+      });
+
+      this.$router.push(PATH_HOME);
     }
   }
 };
@@ -244,7 +300,7 @@ export default {
   width: 90%;
   margin: 50px auto;
   height: 100%;
-  max-height: 350px;
+  max-height: 550px;
   display: flex;
 
   &__list {

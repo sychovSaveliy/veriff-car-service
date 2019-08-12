@@ -3,6 +3,7 @@ import Router from "vue-router";
 import Home from "./views/Home.vue";
 import Login from "./views/Login.vue";
 import log from "./middleware/log";
+import accessToRoute from "./middleware/accessToRoute";
 import auth from "./middleware/auth";
 import Choosing from "./components/Choosing.vue";
 import OrderCar from "./components/OrderCar.vue";
@@ -34,7 +35,8 @@ const router = new Router({
         {
           path: PATH_ORDER_CAR,
           component: OrderCar,
-          name: "order"
+          name: "order",
+          beforeEnter: accessToRoute
         },
         {
           path: PATH_RETURN_CAR,
