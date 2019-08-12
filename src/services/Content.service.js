@@ -23,6 +23,8 @@ const orderContent = {
 const returnContent = {
   title: "Car rental",
   returnBtn: "Return car",
+  continueBtn: "Continue with car",
+  payBtn: "Pay",
   start: "Start:",
   now: "Now:",
   diffInHours: "Diff in Hours:",

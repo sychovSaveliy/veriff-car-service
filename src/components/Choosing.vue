@@ -14,7 +14,7 @@ import { Service } from "@/services";
 const {
   Content: { choosingContent }
 } = Service;
-import * as Routes from "../router";
+import { PATH_ORDER_CAR, PATH_RETURN_CAR } from "../router";
 
 export default {
   data() {
@@ -24,10 +24,10 @@ export default {
   },
   methods: {
     onClickOrder() {
-      this.$router.push(Routes.PATH_ORDER_CAR);
+      this.$router.push(PATH_ORDER_CAR);
     },
     onClickReturn() {
-      this.$router.push(Routes.PATH_RETURN_CAR);
+      this.$router.push(PATH_RETURN_CAR);
     }
   }
 };

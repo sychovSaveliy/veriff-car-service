@@ -14,7 +14,8 @@ import {
   INIT_USER_GEO_ACTION,
   MAP_MUTATION,
   SET_RENTED_CAR_MUTATION,
-  CLEAR_RENTED_CAR_MUTATION
+  CLEAR_RENTED_CAR_MUTATION,
+  FREEZE_RENTED_CAR_MUTATION
 } from "./constants";
 
 export default {
@@ -33,7 +34,8 @@ export default {
       }
     },
     map: null,
-    rentedCar: localStorage.rentCar ? JSON.parse(localStorage.rentCar) : null
+    rentedCar: localStorage.rentCar ? JSON.parse(localStorage.rentCar) : null,
+    freeze: false
   },
   mutations: {
     [ORDER_TYPE_MUTATION](state, payload) {
@@ -71,6 +73,9 @@ export default {
     [CLEAR_RENTED_CAR_MUTATION](state) {
       state.rentedCar = null;
       localStorage.removeItem("rentCar");
+    },
+    [FREEZE_RENTED_CAR_MUTATION](state, payload) {
+      state.freeze = payload.freeze;
     }
   },
   actions: {
@@ -129,6 +134,9 @@ export default {
     },
     getRentedCar(state) {
       return state.rentedCar;
+    },
+    isFreezeState(state) {
+      return state.freeze;
     }
   }
 };

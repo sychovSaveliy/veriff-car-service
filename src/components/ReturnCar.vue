@@ -1,10 +1,8 @@
 <template>
-  <div class="return-car">
+  <div class="return-car" :class="{ 'is-freeze': isFreezeState }">
     <v-flex class="retur-car__container" md6 offset-md3>
       <v-card>
-        <v-card-title class="overline">
-          {{ content.title }}
-        </v-card-title>
+        <v-card-title class="overline">{{ content.title }}</v-card-title>
         <v-card-text class="black--text">
           <v-container grid-list-sm>
             <v-layout align-end wrap>
@@ -41,19 +39,16 @@
           </v-container>
         </v-card-text>
         <v-card-actions>
-          <v-btn>
-            {{ content.returnBtn }}
-          </v-btn>
+          <v-btn @click="onActionCard(true)">{{ content.returnBtn }}</v-btn>
+          <v-btn v-if="isFreezeState" @click="onActionCard(false)">{{ content.continueBtn }}</v-btn>
+          <v-btn v-if="isFreezeState" @click="onPay()">{{ content.payBtn }}</v-btn>
         </v-card-actions>
       </v-card>
     </v-flex>
     <div>
       <v-container>
         <v-flex sm1 offset-sm-3>
-          <v-text-field
-            v-model="priceHour"
-            label="Cost per 1 hour"
-          ></v-text-field>
+          <v-text-field v-model="priceHour" label="Cost per 1 hour"></v-text-field>
         </v-flex>
       </v-container>
     </div>
@@ -64,6 +59,11 @@
 import { mapGetters } from "vuex";
 import { Service } from "@/services";
 import { setInterval } from "timers";
+import {
+  FREEZE_RENTED_CAR_MUTATION,
+  CLEAR_RENTED_CAR_MUTATION
+} from "@/store/constants";
+import { PATH_HOME } from "../router";
 const {
   Content: { returnContent },
   Time
@@ -78,7 +78,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["getRentedCar"]),
+    ...mapGetters(["getRentedCar", "isFreezeState"]),
     getUTC() {
       return Time.getTime(this.getRentedCar.startTime);
     },
@@ -94,6 +94,7 @@ export default {
   },
   created() {
     setInterval(() => {
+      if (this.isFreezeState) return;
       this.currentTime = Time.getTime();
     }, 1000);
   },
@@ -114,6 +115,23 @@ export default {
       seconds = seconds < 10 ? `0${seconds}` : seconds;
 
       return `${day}/${month} - ${hours}:${minutes}:${seconds}`;
+    },
+    onActionCard(freeze) {
+      this.$store.commit({
+        type: FREEZE_RENTED_CAR_MUTATION,
+        freeze
+      });
+    },
+    onPay() {
+      console.log("start payment flow");
+      this.$store.commit({
+        type: FREEZE_RENTED_CAR_MUTATION,
+        freeze: false
+      });
+      this.$store.commit({
+        type: CLEAR_RENTED_CAR_MUTATION
+      });
+      this.$router.push(PATH_HOME);
     }
   }
 };
@@ -123,5 +141,11 @@ export default {
 .return-car {
   height: 100%;
   padding-top: 20px;
+}
+
+.is-freeze {
+  .v-card {
+    background-color: rgba(66, 87, 63, 0.3);
+  }
 }
 </style>
