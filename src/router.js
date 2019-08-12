@@ -36,12 +36,13 @@ const router = new Router({
           path: PATH_ORDER_CAR,
           component: OrderCar,
           name: "order",
-          beforeEnter: accessToRoute
+          beforeEnter: accessToRoute("order")
         },
         {
           path: PATH_RETURN_CAR,
           component: ReturnCar,
-          name: "return"
+          name: "return",
+          beforeEnter: accessToRoute("return")
         }
       ]
     },

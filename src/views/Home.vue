@@ -4,7 +4,8 @@
       <v-container class="app-bar">
         <span class="title" @click="onClickLogo">
           Car rental service<span v-if="getRentedCar" class="font-weight-black">
-            | {{ getRentedCar.info.model }} in your hands!
+            | {{ getRentedCar.info.model }} {{ content.carInHands }} | id:
+            {{ getRentedCar.id }}
           </span>
         </span>
         <transition name="fade">
@@ -19,7 +20,7 @@
       </v-container>
     </v-app-bar>
     <v-content>
-      <router-view></router-view>
+      <router-view />
       <MyPosition />
     </v-content>
   </v-app>
@@ -40,7 +41,8 @@ export default {
   },
   data() {
     return {
-      currentPage: this.switchPath()
+      currentPage: this.switchPath(),
+      content: choosingContent
     };
   },
   computed: {

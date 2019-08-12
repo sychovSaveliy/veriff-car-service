@@ -89,9 +89,6 @@
             </v-card-actions>
           </v-card>
         </v-flex>
-        <v-flex md4>
-          <v-form ref="form" v-model="valid"></v-form>
-        </v-flex>
       </v-container>
     </div>
   </div>
@@ -267,7 +264,7 @@ export default {
 }
 
 .order-view {
-  height: 75%;
+  height: 100%;
 }
 
 .actions-bar {

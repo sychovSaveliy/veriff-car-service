@@ -1,8 +1,14 @@
 import store from "../store";
-export default function accessToRoute(to, from, next) {
-  if (store.state.rentedCar) {
-    return next(false);
-  }
+export default function accessToRoute(type) {
+  return (to, from, next) => {
+    if (store.state.rentedCar && type === "order") {
+      return next(false);
+    }
 
-  next();
+    if (!store.state.rentedCar && type === "return") {
+      return next(false);
+    }
+
+    next();
+  };
 }

@@ -1,6 +1,6 @@
 // services
 import { Service } from "@/services";
-const { API, Geolocation } = Service;
+const { API, Geolocation, Time } = Service;
 // constants
 import {
   ORDER_TYPE_MUTATION,
@@ -13,7 +13,8 @@ import {
   INIT_USER_GEO_MUTATION,
   INIT_USER_GEO_ACTION,
   MAP_MUTATION,
-  SET_RENTED_CAR_MUTATION
+  SET_RENTED_CAR_MUTATION,
+  CLEAR_RENTED_CAR_MUTATION
 } from "./constants";
 
 export default {
@@ -32,7 +33,7 @@ export default {
       }
     },
     map: null,
-    rentedCar: null
+    rentedCar: localStorage.rentCar ? JSON.parse(localStorage.rentCar) : null
   },
   mutations: {
     [ORDER_TYPE_MUTATION](state, payload) {
@@ -64,6 +65,12 @@ export default {
     },
     [SET_RENTED_CAR_MUTATION](state, payload) {
       state.rentedCar = payload.car;
+      state.rentedCar.startTime = Time.getTime();
+      localStorage.rentCar = JSON.stringify(state.rentedCar);
+    },
+    [CLEAR_RENTED_CAR_MUTATION](state) {
+      state.rentedCar = null;
+      localStorage.removeItem("rentCar");
     }
   },
   actions: {

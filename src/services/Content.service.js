@@ -1,6 +1,7 @@
 const choosingContent = {
   orderTitle: "Order car",
-  returnTitle: "Return car"
+  returnTitle: "Return car",
+  carInHands: "in your hands!"
 };
 
 const orderContent = {
@@ -19,10 +20,20 @@ const orderContent = {
   }
 };
 
+const returnContent = {
+  title: "Car rental",
+  returnBtn: "Return car",
+  start: "Start:",
+  now: "Now:",
+  diffInHours: "Diff in Hours:",
+  cost: "Cost:"
+};
+
 const additionalContent = {
   title: "Data managment",
   reInitPosition: "Recalculate position",
-  emulateCars: "Emulate cars 50"
+  emulateCars: "Emulate cars 50",
+  clearRent: "Clear Rent Car"
 };
 
-export { choosingContent, orderContent, additionalContent };
+export { choosingContent, orderContent, additionalContent, returnContent };

@@ -14,8 +14,13 @@
           <v-btn class="managment-action" @click="geolocate()">
             {{ content.reInitPosition }}
           </v-btn>
+        </v-flex>
+        <v-flex md4>
           <v-btn class="managment-action" @click="emulateCars()">
             {{ content.emulateCars }}
+          </v-btn>
+          <v-btn class="managment-action" @click="clearRent()">
+            {{ content.clearRent }}
           </v-btn>
         </v-flex>
       </v-layout>
@@ -25,7 +30,10 @@
 
 <script>
 import { mapGetters } from "vuex";
-import { CAR_INITIAL_LIST_MUTATION } from "@/store/constants";
+import {
+  CAR_INITIAL_LIST_MUTATION,
+  CLEAR_RENTED_CAR_MUTATION
+} from "@/store/constants";
 import { Service } from "@/services";
 const {
   Content: { additionalContent },
@@ -65,6 +73,11 @@ export default {
       this.$store.commit({
         type: CAR_INITIAL_LIST_MUTATION,
         cars
+      });
+    },
+    clearRent() {
+      this.$store.commit({
+        type: CLEAR_RENTED_CAR_MUTATION
       });
     }
   }
