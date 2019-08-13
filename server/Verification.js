@@ -17,22 +17,10 @@ function generateSignature(payload, secret) {
   return signature.digest("hex");
 }
 
-function timestamp() {
-  return new Date().toISOString();
-}
-
 function veriffHandler(req, res) {
   const API_TOKEN = req.body.API_TOKEN;
   const API_SECRET = req.body.API_SECRET;
   const sessionId = req.body.sessionId;
-  const status = req.body.status;
-  const payload = {
-    verification: {
-      frontState: "done",
-      status: status,
-      timestamp: timestamp()
-    }
-  };
   const headers = {
     "x-auth-client": API_TOKEN,
     "x-signature": generateSignature(sessionId, API_SECRET),
