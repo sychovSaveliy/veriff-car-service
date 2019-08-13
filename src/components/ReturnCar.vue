@@ -40,15 +40,22 @@
         </v-card-text>
         <v-card-actions>
           <v-btn @click="onActionCard(true)">{{ content.returnBtn }}</v-btn>
-          <v-btn v-if="isFreezeState" @click="onActionCard(false)">{{ content.continueBtn }}</v-btn>
-          <v-btn v-if="isFreezeState" @click="onPay()">{{ content.payBtn }}</v-btn>
+          <v-btn v-if="isFreezeState" @click="onActionCard(false)">
+            {{ content.continueBtn }}
+          </v-btn>
+          <v-btn v-if="isFreezeState" @click="onPay()">
+            {{ content.payBtn }}
+          </v-btn>
         </v-card-actions>
       </v-card>
     </v-flex>
     <div>
       <v-container>
         <v-flex sm1 offset-sm-3>
-          <v-text-field v-model="priceHour" label="Cost per 1 hour"></v-text-field>
+          <v-text-field
+            v-model="priceHour"
+            label="Cost per 1 hour"
+          ></v-text-field>
         </v-flex>
       </v-container>
     </div>

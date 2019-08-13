@@ -6,31 +6,43 @@
       </v-flex>
     </v-container>
     <v-btn @click="onSessionsDecision()">{{ type }}</v-btn>
-    <v-text-field v-model="type"></v-text-field>
+    <v-flex sm1>
+      <v-text-field v-model="type"></v-text-field>
+    </v-flex>
   </div>
 </template>
 
 <script>
 import { Service } from "@/services";
 const { API } = Service;
-const API_URL = "https://api.veriff.me/v1";
 
 export default {
   data() {
     return {
       sessionId: null,
-      apiKey: "2b257fd2-7a85-4be4-a8e3-5a455cb9b036",
-      apiUrl: "https://api.veriff.me/v1",
-      apiSecret: "1ad0d3b1-b36b-42bc-98a1-6824c51ee8a6",
-      type: "decision"
+      // TODO: Need move to /configs endpoint
+      configs: {
+        API_KEY: null,
+        API_URL: null,
+        API_SECRET: null,
+        env: null
+      },
+      type: "decision",
+      veriffConfig: {}
     };
   },
   mounted() {
-    window.Veriff &&
-      window
-        .Veriff({
-          env: "production",
-          apiKey: this.apiKey,
+    API.fetch("/configs")
+      .then(({ API_KEY, API_URL, API_SECRET, env }) => {
+        this.configs.API_KEY = API_KEY;
+        this.configs.API_URL = API_URL;
+        this.configs.API_SECRET = API_SECRET;
+        this.configs.env = env;
+      })
+      .then(() => {
+        this.veriffConfig = {
+          env: this.configs.env,
+          apiKey: this.configs.API_KEY,
           parentId: "veriff-root",
           callbackUrl: "http://localhost:8080",
           onSession: (err, resp) => {
@@ -38,19 +50,22 @@ export default {
             this.status = resp.verification.status;
             window.open(resp.verification.url);
           }
-        })
-        .mount({
-          submitBtnText: "Veriff Me",
-          loadingText: "Please wait..."
-        });
+        };
+
+        window.Veriff &&
+          window.Veriff(this.veriffConfig).mount({
+            submitBtnText: "Veriff Me",
+            loadingText: "Please wait..."
+          });
+      });
   },
   methods: {
     onSessionsDecision() {
       API.fetch("/veriff/api", {
         method: "POST",
         body: {
-          API_TOKEN: this.apiKey,
-          API_SECRET: this.apiSecret,
+          API_TOKEN: this.configs.API_KEY,
+          API_SECRET: this.configs.API_SECRET,
           sessionId: this.sessionId,
           status: this.status,
           endpoint: this.type

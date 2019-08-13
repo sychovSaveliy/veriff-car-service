@@ -38,12 +38,6 @@ app.get("/", function(req, res) {
   });
 });
 
-app.route("/configs").get((req, res) => {
-  res.json({
-    PORT: port
-  });
-});
-
 app.route("/veriff/api").post(veriffHandler);
 
 app.route("/emulate").post((req, res) => {
