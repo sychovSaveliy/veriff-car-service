@@ -9,6 +9,7 @@
     <v-flex sm1>
       <v-text-field v-model="type"></v-text-field>
     </v-flex>
+    <v-btn @click="onWebhook()">Webhook</v-btn>
   </div>
 </template>
 
@@ -28,7 +29,20 @@ export default {
         env: null
       },
       type: "decision",
-      veriffConfig: {}
+      veriffConfig: {},
+      ws: null
+    };
+  },
+  created() {
+    this.ws = new WebSocket("ws://localhost:7272");
+    this.ws.onopen = function() {
+      console.log('WS подключенно')
+    };
+    this.ws.onclose = function(eventclose) {
+      console.log('соеденение закрыто причина: ' + this.eventclose)
+    };
+    this.ws.onmessage = function(msg) {
+      console.log(msg);
     };
   },
   mounted() {
@@ -73,8 +87,13 @@ export default {
       }).then(({ response }) => {
         if (response.status !== "success") return;
 
-        localStorage.setItem("jwt", response.verification.sessionToken);
+        localStorage.setItem(
+          "jwt",
+          response.verification && response.verification.sessionToken
+        );
       });
+    },
+    onWebhook() {
     }
   }
 };

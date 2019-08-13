@@ -49,4 +49,24 @@ function veriffHandler(req, res) {
     });
 }
 
-module.exports = { veriffHandler };
+function veriffWebhook(req, res) {
+  const API_TOKEN = req.body.API_TOKEN;
+  const API_SECRET = req.body.API_SECRET;
+  const sessionId = req.body.sessionId;
+  const headers = {
+    "x-auth-client": API_TOKEN,
+    "x-signature": generateSignature(sessionId, API_SECRET),
+    "content-type": "application/json"
+  };
+  const options = {
+    method: "POST",
+    headers: headers
+  };
+  fetch(`${API_URL}/webhooks/decision`, options)
+    .then(resp => resp.json())
+    .then(response => {
+      res.json({ response });
+    });
+}
+
+module.exports = { veriffHandler, veriffWebhook };

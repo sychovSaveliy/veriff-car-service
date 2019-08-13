@@ -3,7 +3,7 @@ let app = express();
 let bodyParser = require("body-parser");
 var serveStatic = require("serve-static");
 let $data = require("./../dist/routes/data");
-const { veriffHandler } = require("./Verification");
+const { veriffHandler, veriffWebhook } = require("./Verification");
 const port = process.env.PORT || 5000;
 app.use(
   bodyParser.urlencoded({
@@ -39,6 +39,7 @@ app.get("/", function(req, res) {
 });
 
 app.route("/veriff/api").post(veriffHandler);
+app.route("/veriff/webhook").post(veriffWebhook);
 
 app.route("/emulate").post((req, res) => {
   const { EmulateCars } = require("./Emulation");
