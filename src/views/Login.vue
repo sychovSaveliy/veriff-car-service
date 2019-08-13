@@ -48,7 +48,7 @@ export default {
     };
   },
   created() {
-    this.ws = new WebSocket("ws://veriff-web-hook.herokuapp.com/");
+    this.ws = new WebSocket("wss://veriff-web-hook.herokuapp.com/");
     this.ws.onopen = function() {
       console.log("WS open");
     };
