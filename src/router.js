@@ -30,19 +30,28 @@ const router = new Router({
         {
           path: PATH_HOME,
           component: Choosing,
-          name: "home"
+          name: "home",
+          meta: {
+            middleware: [log, auth]
+          }
         },
         {
           path: PATH_ORDER_CAR,
           component: OrderCar,
           name: "order",
-          beforeEnter: accessToRoute("order")
+          beforeEnter: accessToRoute("order"),
+          meta: {
+            middleware: [log, auth]
+          }
         },
         {
           path: PATH_RETURN_CAR,
           component: ReturnCar,
           name: "return",
-          beforeEnter: accessToRoute("return")
+          beforeEnter: accessToRoute("return"),
+          meta: {
+            middleware: [log, auth]
+          }
         }
       ]
     },

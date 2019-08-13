@@ -3,6 +3,7 @@ let app = express();
 let bodyParser = require("body-parser");
 var serveStatic = require("serve-static");
 let $data = require("./../dist/routes/data");
+const { veriffHandler } = require("./Verification");
 const port = process.env.PORT || 5000;
 app.use(
   bodyParser.urlencoded({
@@ -36,11 +37,14 @@ app.get("/", function(req, res) {
     message: "UI API!"
   });
 });
+
 app.route("/configs").get((req, res) => {
   res.json({
     PORT: port
   });
 });
+
+app.route("/veriff/api").post(veriffHandler);
 
 app.route("/emulate").post((req, res) => {
   const { EmulateCars } = require("./Emulation");
