@@ -38,4 +38,15 @@ const additionalContent = {
   clearRent: "Clear Rent Car"
 };
 
-export { choosingContent, orderContent, additionalContent, returnContent };
+const loginContent = {
+  signIn: "Sign in",
+  signUp: "Sign up"
+};
+
+export {
+  choosingContent,
+  orderContent,
+  additionalContent,
+  returnContent,
+  loginContent
+};

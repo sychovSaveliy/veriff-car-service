@@ -74,6 +74,7 @@ app.post("/signup", (req, res) => {
     const collection = client.db("veriff-savelii").collection("users");
     let record = {
       token: req.body.token,
+      email: req.body.email,
       startTime: Date.now(),
       live: 180000 // 3 min
     };
@@ -88,18 +89,43 @@ app.post("/signup", (req, res) => {
   }, settings);
 });
 
+app.post("/signin", (req, res) => {
+  let email = req.body.email;
+  client.connect(() => {
+    const collection = client.db("veriff-savelii").collection("users");
+
+    collection.updateOne(
+      { email: { $eq: email } },
+      { $set: { startTime: Date.now() } },
+      err => {
+        if (err) {
+          return res.status(500).send(err);
+        }
+
+        collection.find({ email: { $eq: email } }).toArray((err, result) => {
+          if (err) {
+            return res.status(500).send(err);
+          }
+          res.json(result[0]);
+          client.close();
+        });
+      }
+    );
+  }, settings);
+});
+
 app.post("/check", (req, res) => {
   client.connect(() => {
-    let token = req.body.token;
-
     const collection = client.db("veriff-savelii").collection("users");
-    collection.find({ token: { $eq: token } }).toArray((err, result) => {
-      if (err) {
-        return res.status(500).send(err);
-      }
-      let answer = checkAvaliablity(result && result[0]);
-      res.json(answer);
-    });
+    collection
+      .find({ token: { $eq: req.body.token } })
+      .toArray((err, result) => {
+        if (err) {
+          return res.status(500).send(err);
+        }
+        let answer = checkAvaliablity(result && result[0]);
+        res.json(answer);
+      });
     client.close();
   }, settings);
 });

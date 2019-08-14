@@ -2,18 +2,57 @@
   <div class="login-view">
     <v-container text-center>
       <v-flex sm4 offset-sm4>
-        <v-card id="veriff-root" :class="{ 'in-progress': inProgress }">
+        <v-btn @click="changeForm()">
+          {{ typeOfFormSwitcherText }}
+        </v-btn>
+        <v-divider class="login-view__divider"></v-divider>
+        <v-card
+          v-show="formSignUp"
+          id="veriff-root"
+          :class="{ 'in-progress': inProgress }"
+        >
+          <v-card-text>
+            {{ content.signUp }}
+          </v-card-text>
           <v-progress-circular
             class="progress-circular"
             indeterminate
             color="primary"
           ></v-progress-circular>
         </v-card>
+        <v-card v-show="!formSignUp" class="sign-in">
+          <v-form v-model="form.validSignIn">
+            <v-text-field
+              v-model="form.emailSignIn"
+              :rules="form.emailRules"
+              label="E-mail"
+              required
+            ></v-text-field>
+
+            <button class="veriff-submit" @click="onSignIn($event)">
+              {{ content.signIn }}
+            </button>
+          </v-form>
+        </v-card>
       </v-flex>
     </v-container>
     <v-container text-center>
       <v-flex sm4 offset-sm4>
         <v-breadcrumbs v-if="statusList" :items="statusList" divider="-" />
+        <v-card v-show="emailAfterSignUp" class="sign-up">
+          <v-form v-model="form.validSignUp">
+            <v-text-field
+              v-model="form.emailSignUp"
+              :rules="form.emailRules"
+              label="E-mail"
+              required
+            ></v-text-field>
+
+            <button class="veriff-submit" @click="onSignUp($event)">
+              {{ content.signIn }}
+            </button>
+          </v-form>
+        </v-card>
       </v-flex>
     </v-container>
     <!-- <v-btn @click="onSessionsDecision()">{{ type }}</v-btn>
@@ -27,7 +66,10 @@
 <script>
 import { Service } from "@/services";
 import { PATH_HOME } from "../router";
-const { API } = Service;
+const {
+  API,
+  Content: { loginContent }
+} = Service;
 
 export default {
   data() {
@@ -44,8 +86,27 @@ export default {
       veriffConfig: {},
       ws: null,
       inProgress: false,
-      statusList: []
+      statusList: [],
+      formSignUp: true,
+      content: loginContent,
+      form: {
+        validSignIn: false,
+        validSignUp: false,
+        emailSignIn: "",
+        emailSignUp: "",
+        emailRules: [
+          v => !!v || "E-mail is required",
+          v => /.+@.+/.test(v) || "E-mail must be valid"
+        ],
+        verificationId: null
+      },
+      emailAfterSignUp: false
     };
+  },
+  computed: {
+    typeOfFormSwitcherText() {
+      return this.formSignUp ? this.content.signIn : this.content.signUp;
+    }
   },
   created() {
     this.ws = new WebSocket("wss://veriff-web-hook.herokuapp.com/");
@@ -93,26 +154,55 @@ export default {
         text: verificationData.action || verificationData.success,
         disabled: true
       });
-      console.log(verificationData);
+      console.log("hook:", verificationData);
       if (
         verificationData &&
         verificationData.verification &&
         verificationData.verification.status === "approved"
       ) {
-        this.bindTokenToUser(
-          verificationData.verification && verificationData.verification.id
-        );
-        this.$router.push(PATH_HOME);
+        this.emailAfterSignUp = true;
+
+        this.form.verificationId =
+          verificationData.verification && verificationData.verification.id;
+        // this.$router.push(PATH_HOME);
       }
     },
-    bindTokenToUser(token) {
+    bindTokenToUser(token = this.form.verificationId) {
       localStorage.setItem("jwt", token);
       API.fetch("/signup", {
         method: "POST",
         body: {
-          token: token
+          token,
+          email: this.form.emailSignUp
+        }
+      }).then(() => {
+        this.$router.push(PATH_HOME);
+      });
+    },
+    changeForm() {
+      this.formSignUp = !this.formSignUp;
+    },
+    onSignIn(event) {
+      event.preventDefault();
+      if (!this.form.validSignIn) return;
+
+      API.fetch("/signin", {
+        method: "POST",
+        body: {
+          email: this.form.emailSignIn
+        }
+      }).then(resp => {
+        if (resp && resp.token) {
+          localStorage.setItem("jwt", resp.token);
+          this.$router.push(PATH_HOME);
         }
       });
+    },
+    onSignUp(event) {
+      event.preventDefault();
+      if (!this.form.validSignUp) return;
+
+      this.bindTokenToUser();
     }
   }
 };
@@ -124,6 +214,7 @@ export default {
     width: 100%;
     height: 100%;
     padding: 10px;
+    margin-top: 0;
   }
 
   .veriff-text {
@@ -154,5 +245,16 @@ export default {
       display: block;
     }
   }
+}
+
+.login-view {
+  &__divider {
+    margin: 10px 0;
+  }
+}
+
+.sign-in,
+.sign-up {
+  padding: 10px;
 }
 </style>
