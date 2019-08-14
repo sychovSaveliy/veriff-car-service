@@ -23,7 +23,6 @@ export const fetch = (url, options = {}) => {
   options.headers["Access-Control-Allow-Headers"] =
     "Access-Control-Request-Headers,Content-Type";
   options.headers["Content-Type"] = "application/json";
-
   return window
     .fetch(`${getPath() + url}`, options)
     .then(resp => resp.json())

@@ -99,13 +99,20 @@ export default {
         verificationData.verification &&
         verificationData.verification.status === "approved"
       ) {
-        localStorage.setItem(
-          "jwt",
+        this.bindTokenToUser(
           verificationData.verification && verificationData.verification.id
         );
-
         this.$router.push(PATH_HOME);
       }
+    },
+    bindTokenToUser(token) {
+      localStorage.setItem("jwt", token);
+      API.fetch("/signup", {
+        method: "POST",
+        body: {
+          token: token
+        }
+      });
     }
   }
 };

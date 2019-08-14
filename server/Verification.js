@@ -57,4 +57,17 @@ function veriffWebhook(req, res) {
     });
 }
 
-module.exports = { veriffHandler, veriffWebhook };
+function checkAvaliablity(record) {
+  console.log("Record: ", record);
+  if (!record || !record.token) return { status: "forbidden" };
+
+  let timeNow = Date.now();
+
+  if (timeNow - record.startTime >= record.live) {
+    return { status: "forbidden" };
+  }
+
+  return { status: "allow" };
+}
+
+module.exports = { veriffHandler, veriffWebhook, checkAvaliablity };
