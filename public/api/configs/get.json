@@ -1,6 +1,6 @@
 {
     "env": "production",
-    "API_KEY": "2b257fd2-7a85-4be4-a8e3-5a455cb9b036",
-    "API_SECRET": "1ad0d3b1-b36b-42bc-98a1-6824c51ee8a6",
+    "API_KEY": "",
+    "API_SECRET": "",
     "API_URL": "https://api.veriff.me/v1"
 }
